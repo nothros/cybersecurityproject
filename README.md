@@ -1,6 +1,6 @@
 # joojoo!- TodoApp perheille
 
-![sovelluksen logo](https://github.com/nothros/TodoApp-for-families/blob/main/static/logo2.png)
+![sovelluksen logo](https://raw.githubusercontent.com/nothros/ToDoApp-for-families/main/dokumentaatio/logo2.png)
 
 ## Sovelluksen käyttötarkoitus
 
