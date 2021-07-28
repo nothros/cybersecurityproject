@@ -2,14 +2,19 @@ html{
     margin: 0;
     padding: 0;    
     font-family: sans-serif;
-    background-image: url("bg2.png");
+    
     background-position: left top;
     background-size: cover;
     background-attachment: fixed;
     min-height: 100%;
     background-color: #fff;
-
 }
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+}
+
 .laatikko{
   position: absolute;
   right: 0;
@@ -23,8 +28,6 @@ border-color: coral;
 font-family: sans-serif;
 text-align: center;
 } 
-
-
 
 .logokuva{
 border-color: coral;
@@ -48,7 +51,7 @@ box-shadow: 10px 10px #73dfc9;
 
 .h1{
     margin: 0;
-    padding 0 0 20px;
+    padding 0 0 10px;
     text-align: center;
     font-size: 22px;
 }
@@ -57,12 +60,11 @@ box-shadow: 10px 10px #73dfc9;
     margin: 0;
     padding: 0;
     font-weight: bold;
-
 }
 
 .loginbox input{
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .loginbox input[type="text"], input[type="password"]
@@ -81,15 +83,16 @@ height: 40px;
     outline: none;
     height: 40px;
     width: 80%;
+    margin: 10px;
     background: #f3a000;
     color: #fff;
     font-size:18px;
- 
-}
+ }
+
 .loginbox input[type="submit"]:hover
 {
     cursor: pointer;
-    background: #bdf1c8;
+    background: #73dfb6;
     color: #000;
 }
 
@@ -101,7 +104,54 @@ font-weight: bold;
     color: darkgrey;
 }
 
-
 .loginbox a:hover{
-    color: #73dfc9;
+    color: #73dfb6;
 }
+
+
+
+
+
+.animal {
+  display: block;
+  position: absolute;
+  width: 25%;
+  height: auto;
+  bottom: 0;
+right: 0;
+}
+
+nav {
+  background-color: #ddfff5;
+    margin: 0;
+    overflow: hidden;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li:not(:first-child) {
+  float: right;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav ul li a {
+  color: black;
+    display: block;
+    line-height: 3em;
+    padding: 1em 3em;
+    text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #04AA6D;
+}
+
+
+
