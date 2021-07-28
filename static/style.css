@@ -1,0 +1,107 @@
+html{
+    margin: 0;
+    padding: 0;    
+    font-family: sans-serif;
+    background-image: url("bg2.png");
+    background-position: left top;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100%;
+    background-color: #fff;
+
+}
+.laatikko{
+  position: absolute;
+  right: 0;
+  width:500px;
+border-color: coral;
+}
+
+.tekstilaatikko{
+width: 380px;
+border-color: coral;
+font-family: sans-serif;
+text-align: center;
+} 
+
+
+
+.logokuva{
+border-color: coral;
+height: 140px; 
+width: 380px;
+background-image: url("logo2.png");
+background-repeat: no-repeat;
+}
+
+.loginbox{
+text-align: center;
+font-family: sans-serif;
+    background-color: #efefef;
+    width: 380px;
+    height: 500px;
+padding: 20px;
+border-radius: 20px;
+    box-sizing: border-box;
+box-shadow: 10px 10px #73dfc9;
+}
+
+.h1{
+    margin: 0;
+    padding 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.loginbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+
+}
+
+.loginbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginbox input[type="text"], input[type="password"]
+{
+text-align: center;
+border: none;
+border-bottom: 1px solid #000;
+background: transparent;
+height: 40px;
+}
+
+.loginbox input[type="submit"]
+{
+    text-align: center;
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 80%;
+    background: #f3a000;
+    color: #fff;
+    font-size:18px;
+ 
+}
+.loginbox input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #bdf1c8;
+    color: #000;
+}
+
+.loginbox a{
+font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 20px;
+    color: darkgrey;
+}
+
+
+.loginbox a:hover{
+    color: #73dfc9;
+}
