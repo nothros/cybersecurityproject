@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+<div class="loginbox">
+
+
+
+<h1>Luo käyttäjätunnus!</h1>
+    <form>
+        <p>Käyttäjätunnus</p>
+        <input type="text" name="" placeholder="Anna käyttäjätunnus">
+        <p>Nimi</p>
+        <input type="text" name="" placeholder="Anna käyttäjätunnus">
+        <p>Salasana</p>
+<input type="password" name="" placeholder="Anna salasana">
+<p>Salasana uudelleen</p>
+<input type="password" name="" placeholder="Anna salasana uudelleen">
+
+<input type="radio" name="select" id="option-1" checked>
+      <input type="radio" name="select" id="option-2">
+      <label for="option-1" class="option option-1">
+        <div class="dot"></div>
+        <span>Student</span>
+      </label>
+      <label for="option-2" class="option option-2">
+        <div class="dot"></div>
+        <span>Teacher</span>
+      </label>
+        <input type="submit" name="" value="Rekisteröidy">
+</br>
+<a href="#signup"> Kirjaudu </a>
+</form>
+</div>
+{% endblock %}
