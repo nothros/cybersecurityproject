@@ -1,33 +1,40 @@
 {% extends "index.html" %}
 
+{% block content %}
 <div class="loginbox">
+	
+	<h2> {{message}} </h2>
 
-
-
-<h1>Luo käyttäjätunnus!</h1>
-        <form>
-            <p>Käyttäjätunnus</p>
-            <input type="text" name="" placeholder="Anna käyttäjätunnus">
-            <p>Nimi</p>
-            <input type="text" name="" placeholder="Anna käyttäjätunnus">
-            <p>Salasana</p>
-    <input type="password" name="" placeholder="Anna salasana">
-  
-    <div class="wrapper">
-        <input type="radio" name="select" id="option-1" checked>
-        <input type="radio" name="select" id="option-2">
-        <label for="option-1" class="option option-1">
-          <div class="dot"></div>
-          <span>Vanhempi</span>
-        </label>
-        <label for="option-2" class="option option-2">
-          <div class="dot"></div>
-          <span>Lapsi</span>
-        </label>
-      </div>
-            <input type="submit" name="" value="Rekisteröidy">
-    </br>
-    <a href="#signup"> Kirjaudu </a>
-    </form>
+	<h1>Luo käyttäjätunnus!</h1>
+    <form action="/signup" method="POST">
+		
+		<p>Käyttäjätunnus</p>
+		<input type="text" name="username" placeholder="Anna käyttäjätunnus">
+		    
+		<p>Nimi</p>
+		<input type="text" name="name" placeholder="Anna nimesi">
+		    
+		<p>Salasana</p>
+		<input type="password" name="password" placeholder="Anna salasana">
+		
+		<div class="wrapper">
+			<input type="radio" name="role" id="option-1" value ="1" checked="checked" >
+			<input type="radio" name="role" id="option-2" value="2">
+			
+			<label for="option-1" class="option option-1">
+				<div class="dot"></div>
+				<span>Vanhempi</span>
+			</label>
+			
+			<label for="option-2" class="option option-2">
+				<div class="dot"></div>
+				<span>Lapsi</span>
+			</label>
+		</div>
+		<input type="submit" value="Rekisteröidy">
+		
+		</br>
+		<a href="/"> Kirjaudu </a>
+	</form>
 </div>
 {% endblock %}

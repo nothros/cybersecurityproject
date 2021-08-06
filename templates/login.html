@@ -3,17 +3,20 @@
 {% block content %}
 <div class="loginbox">
 
+	<h2>{{message}}</h2>
 
-
-<h1>Tervetuloa!</h1>
-    <form>
-        <p>Käyttäjätunnus</p>
-        <input type="text" name="" placeholder="Anna käyttäjätunnus">
-        <p>Salasana</p>
-<input type="password" name="" placeholder="Anna salasana">
-        <input type="submit" name="" value="Kirjaudu!">
-</br>
-<a href="/signup"> Rekisteröidy </a>
-</form>
+	<h1>Tervetuloa!</h1>
+	<form action="/login" method="POST">
+		<p>Käyttäjätunnus</p>
+		<input type="text" name="username" placeholder="Anna käyttäjätunnus">
+		
+		<p>Salasana</p>
+		<input type="password" name="password" placeholder="Anna salasana">
+		
+		<input type="submit" name="" value="Kirjaudu!">	
+		
+		</br>
+		<a href="/signup"> Rekisteröidy </a>
+	</form>
 </div>
 {% endblock %}
