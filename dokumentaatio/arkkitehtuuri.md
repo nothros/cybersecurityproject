@@ -1,5 +1,19 @@
 # Käyttöliittymäarkkitehtuuri ja toiminnallisuudet
 
+## Sovelluksen käyttötarkoitus
+
+Sovellus on tarkoitettu perheiden kotitöiden jakamiseen ja niiden tekemisen tarkkailuun. Vanhemmat voivat lisätä lapsilleen kotitöitä, 
+joita lapset puolestaan voivat merkitä tehdyiksi. Tehtävän voi määrittää yhdelle lapselle kerrallaan. Sovellukseen tulee luoda käyttäjätunnus
+ja vanhempi voi lisätä perheen.
+
+## Käyttäjät
+Sovelluksella on kaksi käyttäjäroolia. Vanhempi ja lapsi. Vanhempi hallinnoi perheitä ja lapset merkitsevät tehtäviä tehdyiksi.
+
+## Käyttöliittymäluonnos
+![ruudunkaappaus kirjautumissivusta](https://raw.githubusercontent.com/nothros/TodoApp-for-families/main/dokumentaatio/loginpagescreenshot.png)
+(Yllä kuva sovelluksen kirjautumissivusta) <br />
+
+
 <img src ="https://raw.githubusercontent.com/nothros/ToDoApp-for-families/main/dokumentaatio/pagesplan.png" width="750">
 
 Kyseisessä luonnoksessa välissä oleva punainen viiva tarkoittaa, että riippuen käyttäjän roolista, on näkymä erilainen. Vuokaavio kuvaa sivujen yhteyttä toisiinsa.
