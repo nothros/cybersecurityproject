@@ -8,59 +8,49 @@ Sovellus on tarkoitettu perheiden kotitöiden jakamiseen ja niiden tekemisen tar
 joita lapset puolestaan voivat merkitä tehdyiksi. Tehtävän voi määrittää yhdelle lapselle kerrallaan. Sovellukseen tulee luoda käyttäjätunnus
 ja vanhempi voi lisätä perheen.
 
-## Käyttäjät
-Sovelluksella on kaksi käyttäjäroolia. Vanhempi ja lapsi. Vanhempi hallinnoi perheitä ja lapset merkitsevät tehtäviä tehdyiksi.
+## Linkit sovelluksen dokumentaatioon
+[Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md)
 
-## Käyttöliittymäluonnos
-![ruudunkaappaus kirjautumissivusta](https://raw.githubusercontent.com/nothros/TodoApp-for-families/main/dokumentaatio/loginpagescreenshot.png)
-(Yllä kuva sovelluksen kirjautumissivusta) <br />
-Sovellus muodostuu kahdesta erityyppisestä näkymästä:
-Kirjautumissivusta, jolla
-- Käyttäjä voi kirjautua sisään
-- Rekisteröityä käyttäjäksi
+## II-viikkopalautus toiminnallisuus (8.8.2021)
+- Voidaan luoda uusi käyttäjä
+- Voidaan kirjautua sisään
+- Voidaan luoda uusi perhe jos sitä ei ole
+- Voidaan liittyä perheeseen jos sitä ei ole
+- NoFamily- näkymästä voi kirjautua ulos
+- Päänäkymästä voi kirjautua ulos
 
-sekä pääsivusta, jonka toiminnallisuus vaihtelee riippuen onko käyttäjä vanhempi vai lapsi.
-- Pääsivun etusivulla käyttäjä voi tarkistella tehtäviä, ja riippuen roolista lisätä niitä.
-- Tehtävälista- sivulla käyttäjä voi tarkastella kaikkia tehtyjä tehtäviään. Sovellus näyttää tehtävien määrän. 
-- Perhe- sivulla käyttäjä voi tarkistella perhettään. Mikäli käyttäjä on vanhempi, voi hän myös poistaa perheenjäseniä
 
-## Alustava toiminnallisuus
+## II-viikkopalautuksen aikaisest puutteet (8.8.2021)
 
-### Ennen kirjautumista
+Päänäkymä koostuu yhteisesti navigaatiopalkista, joissa mahdollisuus
+Kotinäkymä
 
-Käyttäjä voi luoda sovellukseen oman tilin
+Mikäli tehtäviä ei ole
+- Mikäli käyttäjä on lapsi
+  - Tulee hänelle ilmoitus ettei tehtäviä ole
+- Mikäli käyttäjä on vanhempi
+  - Tulee hänelle ilmoitus ettei tehtäviä ole, mutta voi silti lisätä tehtäviä
 
--   Käyttäjätunnus on kirjautumista varten, sen tulee olla uniikki, sovellus ilmoittaa jos näin ei ole
-- Käyttäjä antaa nimensä
-- Keksii salasanan
-- Valitsee roolin vanhempi tai lapsi.
--   Sovellus ilmoittaa virheestä, mikäli kaikkia syöttökenttiä ei ole täytetty
+Mikäli tehtäviä on
 
-Tai käyttäjä voi kirjautua sovellukseen olemassa olevalla käyttäjätunnuksellaan
+- Käyttäjä on lapsi
+  - Lapsi voi merkata tehtäviä tehdyksi
+ - Käyttäjä on vanhempi
+  - Voi hän lisätä tehtäviä
+  - Näkee hän päivän tehtävät (myös kenelle tehtävät on osoitettu)
 
--   Ilmoitetaan mikäli käyttäjätunnus tai salasana ei täsmää
--   Jos käyttäjä ei ole täyttänyt vaadittavia kenttiä
+Tehtävät
 
-### Kirjautumisen jälkeen
+Kummatkin käyttäjät voivat tarkastella annettuja ja tulevia tehtäviä ja niiden päivämääriä, mutta ainoastaan vanhempi näkee kaikki tehtävät, sekä kenelle ne on osoitettu, lapsi näkee vain omat tehtävänsä.
 
-#### Vanhempi
-- Voi lisätä perheen
-- Voi poistaa perheen
-- Voi poistaa perheenjäseniä
-- Voi poistaa itsensä (tällöin myös perhe poistuu)
-- Voi antaa tehtäviä lapselle
-- Voi muokata tehtäviä
-- Voi poistaa tehtäviä
+Perhe
+- Käyttäjä on lapsi
+  - Lapsi näkee perheenjäsensä
+- Käyttäjä on vanhempi
+  - Näkee perheenjäsenensä
+  - Voi poistaa perheenjäsenen
+  - Voi poistaa perheen
+  - Voi poistaa itsensä (koko perhe poistuu)
+        
 
-Kun vanhempi lisää perheen generoidaan avain jolla perheeseen voi liittyä. Lapsi tarvitsee avaimen perheeseen liittymistä varten.
-
-#### Lapsi
-- Voi liittyä perheeseen
-- Voi merkitä annettuja tehtäviä tehdyiksi
-- Voi tarkastella annettuja tehtäviä
-- Ei voi poistaa tehtäviä
-- Ei voi poistaa itseään
-
-## Alustava tietokantakaavio
-:construction: UNDER CONSTRCUTION :construction:
-
+Tämän lisäksi on erillinen näkymä 404-sivuille.
