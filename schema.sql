@@ -3,16 +3,14 @@ CREATE TABLE users (
     username TEXT,
     firstname TEXT,
     password TEXT,
-    family_role TEXT,
-    UNIQUE(username) 
+    family_role TEXT
 );
 
 CREATE TABLE families (
     id SERIAL PRIMARY KEY,
     family_name TEXT,
-    code TEXT,
-    UNIQUE(family_name)
-);
+    code TEXT
+ );
 
 CREATE TABLE familymembers ( 
     id SERIAL PRIMARY KEY,
