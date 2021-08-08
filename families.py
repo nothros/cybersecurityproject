@@ -14,8 +14,8 @@ def add_family(name, code, user_id):
     return True
 
 def join_family(name, code, user_id):
-    sql = "SELECT * FROM families WHERE name=:name"
-    result = db.session.execute(sql, {"name":name})
+    sql = "SELECT * FROM families WHERE familyname=:familyname"
+    result = db.session.execute(sql, {"familyname":name})
     family = result.fetchone()
     if family == None:
         return False
