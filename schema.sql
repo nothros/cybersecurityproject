@@ -10,7 +10,7 @@ CREATE TABLE users (
 CREATE TABLE families (
     id SERIAL PRIMARY KEY,
     family_name TEXT,
-    code TEXT
+    code TEXT,
     UNIQUE(family_name)
 );
 

@@ -29,9 +29,8 @@ def register(username, name, password, role):
         sql = "INSERT INTO users (username, name, password, role) VALUES (:username, :name, :password,:role)"
         db.session.execute(sql, {"username":username, "name":name, "password":hash_value, "role":role})
         db.session.commit()
-        
-    except OperationalError as e:
-        print(e, file=sys.stdout)
+    
+    except: 
         return False
 
     return True

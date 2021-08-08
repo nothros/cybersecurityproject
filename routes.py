@@ -46,17 +46,17 @@ def register():
         role = request.form["role"]
         
         if len(username) < 3 or len(username) > 15:
-            return render_template("/signup.html", message="Käyttäjätunnuksessa tulee olla 3-15 merkkiä")
+            return render_template("signup.html", message="Käyttäjätunnuksessa tulee olla 3-15 merkkiä")
         if len(name) <2 or len(name)> 30:
-            return render_template("/signup.html", message="Nimen tulee olla 2-30 merkkiä")
+            return render_template("signup.html", message="Nimen tulee olla 2-30 merkkiä")
         if password == "":
-            return render_template("/signup.html", message="Anna salasana!")
+            return render_template("signup.html", message="Anna salasana!")
         if role != "1" and role != "2":
-            return render_template("/signup.html", message="Anna rooli")
+            return render_template("signup.html", message="Anna rooli")
         if users.register(username, name, password, role):
             return redirect("/")
         else:
-            return render_template("/signup.html", message="Ei pyge")
+            return render_template("signup.html", message="Ei pyge")
 
 
 @app.route("/nofamily", methods=["POST"])
@@ -65,18 +65,18 @@ def nofamily():
     code=request.form["code"]
     if session["user_role"]=="1":
         if code == "":
-            return render_template("/add_family.html", message="Anna salasana!")
+            return render_template("add_family.html", message="Anna salasana!")
         if len(name) < 2 or len(name) > 30:
-            return render_template("/add_family.html", message="Nimen tulee olla 2-30 merkkiä")
+            return render_template("add_family.html", message="Nimen tulee olla 2-30 merkkiä")
         if families.add_family(name, code, session["user_id"]):
             return render_template("main.html")
         else: 
-            return render_template("/add_family.html", message="väärin meni")
+            return render_template("add_family.html", message="väärin meni")
     else:
         if code == "":
-            return render_template("/join_family.html", message="Anna salasana!")
+            return render_template("join_family.html", message="Anna salasana!")
         if len(name) < 2 or len(name) > 30:
-            return render_template("/join_family.html", message="Nimen tulee olla 2-30 merkkiä")
+            return render_template("join_family.html", message="Nimen tulee olla 2-30 merkkiä")
 
         if families.join_family(name, code, session["user_id"]):
             return render_template("main.html")
