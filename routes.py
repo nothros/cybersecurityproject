@@ -56,7 +56,7 @@ def register():
         if users.register(username, name, password, role):
             return redirect("/")
         else:
-            return render_template("signup.html", message="Ei pyge")
+            return render_template("signup.html", message="Käyttäjätunnus jo käytössä!")
 
 
 @app.route("/nofamily", methods=["POST"])
@@ -68,10 +68,11 @@ def nofamily():
             return render_template("add_family.html", message="Anna salasana!")
         if len(name) < 2 or len(name) > 30:
             return render_template("add_family.html", message="Nimen tulee olla 2-30 merkkiä")
+
         if families.add_family(name, code, session["user_id"]):
             return render_template("main.html")
         else: 
-            return render_template("add_family.html", message="väärin meni")
+            return render_template("add_family.html", message="Käyttäjätunnus käytössä!")
     else:
         if code == "":
             return render_template("join_family.html", message="Anna salasana!")
@@ -81,7 +82,7 @@ def nofamily():
         if families.join_family(name, code, session["user_id"]):
             return render_template("main.html")
         else: 
-            return render_template("join_family.html", message="väärin meni")
+            return render_template("join_family.html", message="Käyttäjätunnus käytössä!")
 
     return render_template("nofamily.html", message="väärin meni")
 

@@ -1,14 +1,14 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username TEXT,
-    firstname TEXT,
+    username TEXT UNIQUE,
+    name TEXT,
     password TEXT,
     role TEXT
 );
 
 CREATE TABLE families (
     id SERIAL PRIMARY KEY,
-    family_name TEXT,
+    familyname TEXT UNIQUE,
     code TEXT
  );
 
