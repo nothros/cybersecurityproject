@@ -3,7 +3,7 @@ CREATE TABLE users (
     username TEXT,
     firstname TEXT,
     password TEXT,
-    family_role TEXT
+    role TEXT
 );
 
 CREATE TABLE families (
