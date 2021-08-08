@@ -12,11 +12,19 @@ def index():
     if len(users.get_user()) < 2:
         return render_template("login.html", message="")
     else:
-        print(session)
-        if session["user_role"]=="1":
-            return render_template("add_family.html", message="")
+        family = families.get_family(session["user_id"])
+        if family:
+            familyname = families.get_familyname(family.family_id)
+            username = session["user_name"]
+            memberamount= families.get_amount(session["user_id"])
+            return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
+        
         else:
-            return render_template("join_family.html", message="")
+            if session["user_role"]=="1":
+                return render_template("add_family.html", message="")
+            else:
+                return render_template("join_family.html", message="")
+         
     
 #DONE
 @app.route("/login", methods=["GET","POST"])
@@ -70,7 +78,10 @@ def nofamily():
             return render_template("add_family.html", message="Nimen tulee olla 2-30 merkkiä")
 
         if families.add_family(name, code, session["user_id"]):
-            return render_template("main.html")
+            familyname = name
+            username = session["user_name"]
+            memberamount= families.get_amount(session["user_id"])
+            return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
         else: 
             return render_template("add_family.html", message="Käyttäjätunnus käytössä!")
     else:
@@ -80,7 +91,11 @@ def nofamily():
             return render_template("join_family.html", message="Nimen tulee olla 2-30 merkkiä")
 
         if families.join_family(name, code, session["user_id"]):
-            return render_template("main.html")
+            familyname = name
+            username = session["user_name"]
+            memberamount= families.get_amount(session["user_id"])
+
+            return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
         else: 
             return render_template("join_family.html", message="Käyttäjätunnus käytössä!")
 
@@ -91,7 +106,7 @@ def nofamily():
 @app.route("/main", methods=["GET","POST"])
 def mainpage():
     if request.method == "GET":
-        return render_template("main.html")
+        return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
     if request.method == "POST":
         return render_template("main.html")
 

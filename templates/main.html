@@ -30,31 +30,16 @@
             <li><a href="/logout"><i class="fa fa-sign-out"></i> Kirjaudu ulos</a></li>
             <li><a href="#contact"><i class="fa fa-users"></i></i> Perhe </a></li>
             <li><a href="#news"><i class="fa fa-calendar-check-o"></i> Tehtävälista </a></li>
-            <li><a href="/logo"><i class="fa fa-fw fa-home"></i> Koti </a></li>
-
-
-
+            <li><a href="#logo"><i class="fa fa-fw fa-home"></i> Koti </a></li>
         </ul>
     </nav>
-    <div class = "nofamily">
-        <form>
-            <h2>Onko sinulla perhe?</h2> 
-            <p></p>Syötä vanhemmalta saamasi koodi</p>
-            <input type="text" name="code" placeholder="Anna koodi">
-        </br>
 
-            <input type="submit" name="" value="Liity perheeseen">
-            <h2>Lisää uusi perhe</h2>
-            <p>Keksi perheellesi nimi ja koodi jonka avulla muut voivat kirjautua</p>
-            <input type="text" name="familyname" placeholder="Anna perheelle nimi">
-            <input type="text" name="pickcode" placeholder="Anna koodi">
+    <h1>nimesi on : {{user_name}}</h1>
+    <h1>perheesi nimi on : {{familyname}}</h1>
+    <h1>perheessäsi on {{member_amount}} henkilö(ä)</h1>
+    {{user_name}}
+    {{member_amount}}
 
-
-            <input type="submit" name="" value="Lisää perhe">
-        </br>
-            <a href="#signup"> Kirjaudu ulos</a>
-    </form>
-    </div>
     <img src="./static/doggo.png" class="animal">
 
 </body>
