@@ -1,33 +1,62 @@
-<html>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<doctype! html>
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
-        <!-- Load an icon library -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-</head>
-
-    <body>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css') }}"/>
+<!-- Load an icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-        <nav>
-            <ul>
-              <li><img src="logo2.png" width="50%" style="vertical-align:middle;margin:10px 10px">
-              </li>
-              <li><a href="#about"><i class="fa fa-gear"></i> Asetukset</a></li>
-              <li><a href="#contact"><i class="fa fa-users"></i></i> Perhe </a></li>
-              <li><a href="#news"><i class="fa fa-calendar-check-o"></i> Tehtävälista </a></li>
-              <li><a href="#home"><i class="fa fa-fw fa-home"></i> Koti </a></li>
-              
-              
-              
-            </ul>
-          </nav>
-        
-        <img src="doggo.png" class ="animal" >
+<style>
+  body {
+      margin: 0;
+      padding: 0;    
+      padding: 0;    
+      background-image: none;
+      background-position: left top;
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 100%;
+  }
+  </style>
+<body>
+
+
+    <nav>
+        <ul>
+            <li><img src="./static/logo2.png" width="50%" style="vertical-align:middle;margin:10px 10px">
+            </li>
+            <li><a href="/logout"><i class="fa fa-sign-out"></i> Kirjaudu ulos</a></li>
+            <li><a href="#contact"><i class="fa fa-users"></i></i> Perhe </a></li>
+            <li><a href="#news"><i class="fa fa-calendar-check-o"></i> Tehtävälista </a></li>
+            <li><a href="/logo"><i class="fa fa-fw fa-home"></i> Koti </a></li>
 
 
 
-    </body>
+        </ul>
+    </nav>
+    <div class = "nofamily">
+        <form>
+            <h2>Onko sinulla perhe?</h2> 
+            <p></p>Syötä vanhemmalta saamasi koodi</p>
+            <input type="text" name="code" placeholder="Anna koodi">
+        </br>
+
+            <input type="submit" name="" value="Liity perheeseen">
+            <h2>Lisää uusi perhe</h2>
+            <p>Keksi perheellesi nimi ja koodi jonka avulla muut voivat kirjautua</p>
+            <input type="text" name="familyname" placeholder="Anna perheelle nimi">
+            <input type="text" name="pickcode" placeholder="Anna koodi">
+
+
+            <input type="submit" name="" value="Lisää perhe">
+        </br>
+            <a href="#signup"> Kirjaudu ulos</a>
+    </form>
+    </div>
+    <img src="./static/doggo.png" class="animal">
+
+</body>
+
 </html>

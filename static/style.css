@@ -2,19 +2,30 @@ html{
     margin: 0;
     padding: 0;    
     font-family: sans-serif;
-    
+}
+
+
+
+body {
+    margin: 0;
+    padding: 0;    
+    padding: 0;    
+    background-image: url("/static/bg2.png");
     background-position: left top;
     background-size: cover;
     background-attachment: fixed;
     min-height: 100%;
-    background-color: #fff;
-}
-body {
   margin: 0;
   padding: 0;
   font-size: 15px;
 }
 
+h2{
+  font-size: 15px;
+  font-weight: bold;
+  min-height: 16px;
+  color: red;
+}
 .laatikko{
   position: absolute;
   right: 0;
@@ -109,7 +120,60 @@ font-weight: bold;
 }
 
 
+.nofamily{
+  text-align: center;
+  font-family: sans-serif;
+      background-color: #efefef;
+      width: 500px;
+      height: 550px;
+  padding: 20px;
+  border-radius: 20px;
+      box-sizing: border-box;
+  box-shadow: 10px 10px #73dfc9;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-left: auto;
+  }
+  .nofamily input[type="submit"]
+  {
+      text-align: center;
+      border: none;
+      outline: none;
+      height: 40px;
+      width: 200px;
+      margin: 10px;
+      background: #f3a000;
+      color: #fff;
+      font-size:18px;
+   }
+  
+  .nofamily input[type="submit"]:hover
+  {
 
+      cursor: pointer;
+      background: #73dfb6;
+      color: #000;
+  }
+  .nofamily input[type="text"]
+  {
+    font-size: large;
+  text-align: center;
+  border: solid #04AA6D;
+  background: white;
+  height: 40px;
+  }
+
+  .nofamily a{
+    font-weight: bold;
+        text-decoration: none;
+        font-size: 16px;
+        line-height: 20px;
+        color: darkgrey;
+    }
+    
+    .nofamily a:hover{
+        color: #73dfb6;
+    }
 
 
 .animal {
@@ -120,6 +184,8 @@ font-weight: bold;
   bottom: 0;
 right: 0;
 }
+
+
 
 nav {
   background-color: #ddfff5;
@@ -140,6 +206,19 @@ nav ul li {
     display: inline-block;
     list-style-type: none;
 }
+
+nav ul li a {
+  color: black;
+    display: block;
+    line-height: 3em;
+    padding: 1em 3em;
+    text-decoration: none;
+}
+
+nav li a:hover {
+  background-color: #04AA6D;
+}
+
 
 .wrapper{
 
@@ -216,18 +295,6 @@ input[type="radio"]{
 #option-2:checked:checked ~ .option-2 span{
 
   color: #fff;
-}
-
-nav ul li a {
-  color: black;
-    display: block;
-    line-height: 3em;
-    padding: 1em 3em;
-    text-decoration: none;
-}
-
-nav li a:hover {
-  background-color: #04AA6D;
 }
 
 

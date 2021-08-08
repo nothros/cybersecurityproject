@@ -1,0 +1,17 @@
+{% extends "nofamily.html" %}
+
+{% block content %}
+<div class = "nofamily">
+<form action="/nofamily" method="POST">
+    <h1>Onko sinulla perhe?</h1> 
+    <p></p>Syötä vanhemmalta saamasi koodi</p>
+    <input type="text" name="familyname" placeholder="Anna perheen nimi">
+    <p></p>Syötä vanhemmalta saamasi koodi</p>
+    <input type="text" name="code" placeholder="Anna koodi">
+</br>
+
+    <input type="submit" name="" value="Liity perheeseen">
+</form>
+<a href="/logout"> Kirjaudu ulos</a>
+</div>
+{% endblock %}
