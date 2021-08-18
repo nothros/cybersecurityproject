@@ -29,12 +29,6 @@ def join_family(name, code, user_id):
             return False
     return True
     
-def get_amount(memberid):
-    sql = "SELECT COUNT(t2.family_id) FROM familymembers t1 JOIN familymembers t2 ON t2.family_id = t1.family_id WHERE t1.member_id =:member_id GROUP BY t1.member_id"
-    result = db.session.execute(sql, {"member_id":memberid})
-    counter = result.fetchone()[0]
-    return counter
-
 def get_family(memberid):
     sql = "SELECT * FROM familymembers WHERE member_id=:member_id"
     result = db.session.execute(sql, {"member_id":memberid})
@@ -50,3 +44,9 @@ def get_familyname(familyid):
     if family == None:
         return False
     return family.familyname
+
+def get_members(userid):
+    sql = "SELECT U.id, U.name, U.role FROM Users U, (SELECT * FROM familymembers WHERE member_id=:id) member1, familymembers member2 WHERE member1.family_id = member2.family_id AND  U.id = member2.member_id"
+    result = db.session.execute(sql, {"id":userid})
+    members = result.fetchall()
+    return members

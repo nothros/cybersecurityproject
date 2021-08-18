@@ -35,7 +35,11 @@ def register(username, name, password, role):
 
     return True
 
-
+def remove_user(userid):
+        sql = "DELETE FROM users WHERE id=:id"
+        db.session.execute(sql, {"id":userid})
+        db.session.commit()
+    
 
 
 def logout():

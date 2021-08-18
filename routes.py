@@ -3,34 +3,33 @@ from app import app
 from flask import redirect, render_template, request
 from flask import render_template
 import users, families
+import datetime
+
 
 #DONE
 @app.route("/")
 def index():
-    print(users.get_user())
-    print(len(users.get_user()))
     if len(users.get_user()) < 2:
-        return render_template("login.html", message="")
+        return render_template("/login.html", message="")
     else:
         family = families.get_family(session["user_id"])
         if family:
-            familyname = families.get_familyname(family.family_id)
-            username = session["user_name"]
-            memberamount= families.get_amount(session["user_id"])
-            return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
-        
+            familymembers = families.get_members(session["user_id"])
+            date = datetime.datetime.now()
+            return render_template("home.html", familymembers=familymembers, date=date)
+
         else:
-            if session["user_role"]=="1":
-                return render_template("add_family.html", message="")
+            if session["user_role"] == "aikuinen":
+                return render_template("/add_family.html", message="")
             else:
-                return render_template("join_family.html", message="")
+                return render_template("/join_family.html", message="")
          
     
 #DONE
-@app.route("/login", methods=["GET","POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
-        return render_template("login.html", message="")
+        return render_template("login.html",message="")
     
     if request.method == "POST":
         username = request.form["username"]
@@ -59,7 +58,7 @@ def register():
             return render_template("signup.html", message="Nimen tulee olla 2-30 merkkiä")
         if password == "":
             return render_template("signup.html", message="Anna salasana!")
-        if role != "1" and role != "2":
+        if role != "aikuinen" and role != "lapsi":
             return render_template("signup.html", message="Anna rooli")
         if users.register(username, name, password, role):
             return redirect("/")
@@ -67,21 +66,22 @@ def register():
             return render_template("signup.html", message="Käyttäjätunnus jo käytössä!")
 
 
+
+
+
 @app.route("/nofamily", methods=["POST"])
 def nofamily():
-    name=request.form["familyname"]
-    code=request.form["code"]
-    if session["user_role"]=="1":
+    name = request.form["familyname"]
+    code = request.form["code"]
+    if session["user_role"]=="aikuinen":
         if code == "":
             return render_template("add_family.html", message="Anna salasana!")
         if len(name) < 2 or len(name) > 30:
             return render_template("add_family.html", message="Nimen tulee olla 2-30 merkkiä")
 
         if families.add_family(name, code, session["user_id"]):
-            familyname = name
-            username = session["user_name"]
-            memberamount= families.get_amount(session["user_id"])
-            return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
+
+            return redirect("/")
         else: 
             return render_template("add_family.html", message="Käyttäjätunnus käytössä!")
     else:
@@ -93,9 +93,8 @@ def nofamily():
         if families.join_family(name, code, session["user_id"]):
             familyname = name
             username = session["user_name"]
-            memberamount= families.get_amount(session["user_id"])
-
-            return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
+            memberamount = families.get_amount(session["user_id"])
+            return redirect("/")
         else: 
             return render_template("join_family.html", message="Käyttäjätunnus käytössä!")
 
@@ -103,12 +102,32 @@ def nofamily():
 
 
 
-@app.route("/main", methods=["GET","POST"])
-def mainpage():
+
+
+
+@app.route("/family", methods=["GET", "POST"])
+def family():
     if request.method == "GET":
-        return render_template("main.html", familyname=familyname, user_name=username, member_amount= memberamount)
+        familymembers = families.get_members(session["user_id"])
+        return render_template("family.html", familymembers=familymembers)
     if request.method == "POST":
-        return render_template("main.html")
+        remove_userid = request.form["delete"]
+        users.remove_user(remove_userid)
+
+
+        familymembers = families.get_members(session["user_id"])
+        return render_template("family.html", familymembers=familymembers)
+
+
+@app.route("/home", methods=["GET", "POST"])
+def home():
+    if request.method == "GET":
+        familymembers = families.get_members(session["user_id"])
+        date = datetime.datetime.now()
+        return render_template("home.html", familymembers=familymembers, date=date)
+
+
+
 
 
 

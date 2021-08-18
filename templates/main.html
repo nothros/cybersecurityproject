@@ -28,17 +28,14 @@
             <li><img src="./static/logo2.png" width="50%" style="vertical-align:middle;margin:10px 10px">
             </li>
             <li><a href="/logout"><i class="fa fa-sign-out"></i> Kirjaudu ulos</a></li>
-            <li><a href="#contact"><i class="fa fa-users"></i></i> Perhe </a></li>
+            <li><a href="/family"><i class="fa fa-users"></i></i> Perhe </a></li>
             <li><a href="#news"><i class="fa fa-calendar-check-o"></i> Tehtävälista </a></li>
-            <li><a href="#logo"><i class="fa fa-fw fa-home"></i> Koti </a></li>
+            <li><a href="/home"><i class="fa fa-fw fa-home"></i> Koti </a></li>
         </ul>
     </nav>
 
-    <h1>nimesi on : {{user_name}}</h1>
-    <h1>perheesi nimi on : {{familyname}}</h1>
-    <h1>perheessäsi on {{member_amount}} henkilö(ä)</h1>
-    {{user_name}}
-    {{member_amount}}
+    {% block content %}{% endblock %}
+
 
     <img src="./static/doggo.png" class="animal">
 
