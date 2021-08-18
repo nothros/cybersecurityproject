@@ -6,7 +6,7 @@
 
 Sovellus on tarkoitettu perheiden kotitöiden jakamiseen ja niiden tekemisen tarkkailuun. Vanhemmat voivat lisätä lapsilleen kotitöitä, 
 joita lapset puolestaan voivat merkitä tehdyiksi. Tehtävän voi määrittää yhdelle lapselle kerrallaan. Sovellukseen tulee luoda käyttäjätunnus
-ja vanhempi voi lisätä perheen.
+ja vanhempi voi lisätä perheen johon lapsi voi liittyä
 
 ## Linkit sovelluksen dokumentaatioon
 [Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md)
@@ -14,43 +14,32 @@ ja vanhempi voi lisätä perheen.
 ## II-viikkopalautus toiminnallisuus (8.8.2021)
 - Voidaan luoda uusi käyttäjä
 - Voidaan kirjautua sisään
-- Voidaan luoda uusi perhe jos sitä ei ole
-- Voidaan liittyä perheeseen jos sitä ei ole
+- Voidaan luoda uusi perhe jos sitä ei ole (aikuinen)
+- Voidaan liittyä perheeseen jos sitä ei ole (lapsi)
 - NoFamily- näkymästä voi kirjautua ulos
 - Päänäkymästä voi kirjautua ulos
 
+## Linkki sovellukseen
+[https://joojoo-app.herokuapp.com/](https://joojoo-app.herokuapp.com/)
 
-## II-viikkopalautuksen aikaisest puutteet (8.8.2021)
+## Käyttöohje
+- Voit rekisteröidä uuden käyttäjän painamalla etusivulla näkyvää Rekisteröidy- linkkiä
 
-Päänäkymä koostuu yhteisesti navigaatiopalkista, joissa mahdollisuus
-Kotinäkymä
+- Rekisteröimisvaiheessa, mikäli olet tehnyt jotain väärin, sovellus ilmoittaa siitä asiaankuuluvalla virheviestillä.
+- Mikäli rekisteröinti onnistuu, sovellus ohjaa takaisin etusivulle.
 
-Mikäli tehtäviä ei ole
-- Mikäli käyttäjä on lapsi
-  - Tulee hänelle ilmoitus ettei tehtäviä ole
-- Mikäli käyttäjä on vanhempi
-  - Tulee hänelle ilmoitus ettei tehtäviä ole, mutta voi silti lisätä tehtäviä
+- Voit kirjautua tunnuksellasi sisään, ja sovellus ilmoittaa "Käyttäjätunnus tai salasana ei täsmää" mikäli syötät vääriä syötteitä.
 
-Mikäli tehtäviä on
+- Mikäli valitsit käyttäjärooliksi aikuisen, voif luoda perheen. Perheelle tulee olla yksilöllinen nimi ja koodi
+- Mikäli valitsit käyttäjärooliksi lapsen, voit liittyä jo valmiiksi luotuun perheeseen 
+  - Voit kokeilla liittyä valmiiseen perheeseen perheen nimi: testi koodi: testi 
 
-- Käyttäjä on lapsi
-  - Lapsi voi merkata tehtäviä tehdyksi
- - Käyttäjä on vanhempi
-  - Voi hän lisätä tehtäviä
-  - Näkee hän päivän tehtävät (myös kenelle tehtävät on osoitettu)
+- Voit kirjautua perheen luonnin yhteydessä ulos.
 
-Tehtävät
+- Pääsivulle päästessäsi, voit kirjautua ulos sivulta oikeasta yläkulmasta navigaatiopalkista.
 
-Kummatkin käyttäjät voivat tarkastella annettuja ja tulevia tehtäviä ja niiden päivämääriä, mutta ainoastaan vanhempi näkee kaikki tehtävät, sekä kenelle ne on osoitettu, lapsi näkee vain omat tehtävänsä.
 
-Perhe
-- Käyttäjä on lapsi
-  - Lapsi näkee perheenjäsensä
-- Käyttäjä on vanhempi
-  - Näkee perheenjäsenensä
-  - Voi poistaa perheenjäsenen
-  - Voi poistaa perheen
-  - Voi poistaa itsensä (koko perhe poistuu)
-        
+## II-viikkopalautuksen aikaiset kriittiset puutteet (8.8.2021)
 
-Tämän lisäksi on erillinen näkymä 404-sivuille.
+- Kaikki lopputoiminnallisuus itse sovellukselta (näitä voit tarkastella [Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md) osiosta
+- **pääsivustolla näkyvä käyttäjän nimi ja perheen nimi, sekä perheenjäsenten määrä eivät ole jäämässä sivulle**
