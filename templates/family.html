@@ -1,0 +1,45 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+{% if session.user_role == "aikuinen" %}
+<form action="/family" method="post">
+    <table>
+        <tr>
+          <th>nimi</th>
+          <th>rooli</th>
+          <th>poista</th>
+        </tr>
+      
+            {% for member in familymembers %}
+            <tr>
+            {% if member.id == session["user_id"]%}
+            <th> {{ member[1] }} </th>
+            <th> {{ member[2] }}</th>
+            <th></th>
+            {% else %}
+            <th> {{ member[1] }} </th>
+            <th>{{ member[2] }}</th>
+            <th><button class="delete" name="delete" value="{{ member.id }}">Delete</button></th>
+            {% endif %}
+            {% endfor %}
+        </tr>
+   
+</form>
+{%else%}
+<table>
+    <tr>
+      <th>nimi</th>
+      <th>rooli</th>
+    </tr>
+   
+        {% for member in familymembers %}
+        <tr>
+        <th> {{ member[1] }} </th>
+        <th> {{ member[2] }}</th>
+    </tr>
+
+{% endfor %}
+{% endif %}
+</table>
+{% endblock %}
