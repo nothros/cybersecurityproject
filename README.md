@@ -1,5 +1,7 @@
 # joojoo!- TodoApp perheille
 
+# KESKEN (18.8)
+
 ![sovelluksen logo](https://raw.githubusercontent.com/nothros/ToDoApp-for-families/main/dokumentaatio/logo2.png)
 
 ## Sovelluksen käyttötarkoitus
@@ -8,38 +10,82 @@ Sovellus on tarkoitettu perheiden kotitöiden jakamiseen ja niiden tekemisen tar
 joita lapset puolestaan voivat merkitä tehdyiksi. Tehtävän voi määrittää yhdelle lapselle kerrallaan. Sovellukseen tulee luoda käyttäjätunnus
 ja vanhempi voi lisätä perheen johon lapsi voi liittyä
 
-## Linkit sovelluksen dokumentaatioon
-[Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md)
-
-## II-viikkopalautus toiminnallisuus (8.8.2021)
-- Voidaan luoda uusi käyttäjä
-- Voidaan kirjautua sisään
-- Voidaan luoda uusi perhe jos sitä ei ole (aikuinen)
-- Voidaan liittyä perheeseen jos sitä ei ole (lapsi)
-- NoFamily- näkymästä voi kirjautua ulos
-- Päänäkymästä voi kirjautua ulos
 
 ## Linkki sovellukseen
 [https://joojoo-app.herokuapp.com/](https://joojoo-app.herokuapp.com/)
 
-## Käyttöohje
+
+## Linkit sovelluksen dokumentaatioon
+
+[Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md)
+
+
+# Toiminnallisuus
+### (22.8.2021)
+
+### Kirjautuminen/Rekisteröinti
+- Voidaan luoda uusi käyttäjä
+- Voidaan kirjautua sisään
+### Mikäli perhettä ei ole vielä luotu
+- Voidaan luoda uusi perhe (aikuinen)
+- Voidaan liittyä perheeseen (lapsi)
+- NoFamily- näkymästä voi kirjautua ulos
+### Päänäkymä 
+#### Koti
+- Voidaan lisätä kurssi (aikuinen) 
+- Päivän tehtävät näkyvät listana
+#### Tehtävät
+- Kaikkien käyttäjien tehtävät näkyvät (aikuinen)
+- Tehtäviä voidaan poistaa (aikuinen)
+- Kaikki omat tehtävät näkyvät (lapsi)
+#### Perhe
+- Kaikki perheenjäsenet näkyvät
+- Aikuinen voi poistaa perheenjäseniä
+#### Kirjaudu ulos 
+- Sovelluksesta voidaan kirjautua ulos
+### 404
+- Sovellus antaa errorsivuston 404,  mikäli sivulle ei pääse
+
+
+# Käyttöohje
+### Rekisteröinti
 - Voit rekisteröidä uuden käyttäjän painamalla etusivulla näkyvää Rekisteröidy- linkkiä
 
 - Rekisteröimisvaiheessa, mikäli olet tehnyt jotain väärin, sovellus ilmoittaa siitä asiaankuuluvalla virheviestillä.
 - Mikäli rekisteröinti onnistuu, sovellus ohjaa takaisin etusivulle.
 
+### Kirjautuminen ja perheen lisäys
 - Voit kirjautua tunnuksellasi sisään, ja sovellus ilmoittaa "Käyttäjätunnus tai salasana ei täsmää" mikäli syötät vääriä syötteitä.
 
-- Mikäli valitsit käyttäjärooliksi aikuisen, voif luoda perheen. Perheelle tulee olla yksilöllinen nimi ja koodi
+- Mikäli valitsit käyttäjärooliksi aikuisen, voit luoda perheen. Perheelle tulee olla yksilöllinen nimi ja koodi, jolla lapsi voi liittyä perheeseen.
+  - Voit kokeilla valmista perhettä käyttäjänimi:koodi salasana: koodi
+  - 
 - Mikäli valitsit käyttäjärooliksi lapsen, voit liittyä jo valmiiksi luotuun perheeseen 
-  - Voit kokeilla liittyä valmiiseen perheeseen perheen nimi: testi koodi: testi 
+  - Voit kokeilla liittyä valmiiseen perheeseen perheen nimi: testi koodi: testi1 
+  - (Tai voit luoda aikuisen, tehdä perheen, ja liityä tähän lapsikäyttäjänä)
 
-- Voit kirjautua perheen luonnin yhteydessä ulos.
+- Voit kirjautua perheen luonnin yhteydessä ulos, sovellus ohjaa takaisin kirjautumissivulle.
+### Kirjautuneena
+
+#### Koti
+- Aikuisena näät kaikki perheenjäsenten tehtävät tältä päivältä listassa
+- Aikuisena voit lisätä tehtävän perheenjäsenelle
 
 - Pääsivulle päästessäsi, voit kirjautua ulos sivulta oikeasta yläkulmasta navigaatiopalkista.
 
 
-## II-viikkopalautuksen aikaiset kriittiset puutteet (8.8.2021)
+## III-viikkopalautuksen aikaiset kriittiset puutteet ja mahdolliset kehitysideat (22.8.2021)
 
-- Kaikki lopputoiminnallisuus itse sovellukselta (näitä voit tarkastella [Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md) osiosta
-- **pääsivustolla näkyvä käyttäjän nimi ja perheen nimi, sekä perheenjäsenten määrä eivät ole jäämässä sivulle**
+### Puutteet jotka korjataan sovellukseen
+- Reititys ei toimi ( mikäli hakee sivua joka ei ole olemassa, tulee 404-error. Mutta muuten tulee ongelmia, jos ei ole sisäänkirjatunut. (tämän selvitän maanantaina)
+- Oikeuksissa puutteita
+- Tietoturvaa en ole tarkastellut
+- Kirjautumisen jälkeinen ulkoasu (esim lomakkeilla) ei vastaa lopullista!
+- Asetukset- sivu uupuu
+- Yksi tietokantataulu (tasklists) putosi huonon suunnittelun tuloksena. Tilalle on tulossa jotain kunhan keksin mitä...
+- Koodin muotoilu ei ole lopullinen! (eikös vscodeen ollut joku lisäke- joka taiteilee nuo ylimääräiset whitesp
+
+### Kehitysideat jotka on otettu huomioon ja jotka korjataan jos aikaa jää
+- Salasanaa tulisi rekisteröintivaiheessa kysyä kahdesti (saavutettavuus)
+- Lapsen liittyessä perheeseen voisi kysyä vain koodia, eikä perhettä (saavutettavuus)
+- Validointivirheilmoitukset annetaan yksi kerrallaan. Kaikki relevantit virheilmoitukset olisi hyvä näyttää kerralla. (käytettävyys)
