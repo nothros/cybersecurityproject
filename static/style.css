@@ -41,6 +41,7 @@ text-align: center;
 } 
 
 .logokuva{
+margin-top: 20px;
 border-color: coral;
 height: 140px; 
 width: 380px;
@@ -296,6 +297,4 @@ input[type="radio"]{
 
   color: #fff;
 }
-
-
 

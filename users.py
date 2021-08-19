@@ -40,8 +40,6 @@ def remove_user(userid):
         db.session.execute(sql, {"id":userid})
         db.session.commit()
     
-
-
 def logout():
     del session["user_id"]
     del session["user_username"]

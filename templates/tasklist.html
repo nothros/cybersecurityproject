@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+
+
+<table>
+  <tr>
+    <th>tehtävä</th>
+    <th>tekijä</th>
+    <th> pvm </th>
+    {% if session.user_role == "aikuinen" %}
+    <th> poista tehtävä </th>
+    {% endif %}
+  </tr>
+  <form action="/tasklist" method="post">
+      {% for task in tasklist %}
+      <tr>
+      <th> {{ task[0] }} </th>
+      <th> {{ task[1] }}</th>
+      <th> {{ task[2] }}</th>
+      {% if session.user_role == "aikuinen" %}
+      <th><button class="delete" name="delete" value="{{ task.id }}">Delete</button></th>
+      {% endif %}
+      {% endfor %}
+  </tr>
+  </form>
+
+
+</table>
+
+{% endblock %}
