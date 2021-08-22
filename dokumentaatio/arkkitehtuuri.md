@@ -1,4 +1,4 @@
-# Käyttöliittymäarkkitehtuuri ja toiminnallisuudet
+# Käyttöliittymäarkkitehtuuri ja toiminnallisuudet (EI LOPULLINEN)
 
 ## Sovelluksen käyttötarkoitus
 
