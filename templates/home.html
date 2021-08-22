@@ -2,38 +2,46 @@
 
 
 {% block content %}
-
+{% if session.user_role == "aikuinen" %}
 <form action="/home" method="post">
     <p>Tehtävä</p>
 		<input type="text" name="task" placeholder="Anna tehtävä">
-		
-    <select name="doer">  
-        {% for member in familymembers %}
-        <option value="{{ member.id }}">{{ member[1] }}</option>  
-
-{% endfor %}
-   
-     </select>  
-
+    <select name="doer">
+    {% for member in familymembers %}
+      <option value="{{ member.id }}">{{ member[1] }}</option>
+    {% endfor %}
+    </select>
      <input type="date" name="deadline" placeholder="{{ date }}"
             value="{{ date }}"
             min="2021-01-01" max="2021-12-31">
 
-            <input type="submit" name="" value="Lisää tehtävä!">	
+            <input type="submit" name="" value="Lisää tehtävä!">
 </form>
-
+{% endif %}
 <table>
   <tr>
     <th>tehtävä</th>
     <th>tekijä</th>
     <th> pvm </th>
+    {% if session.user_role == "lapsi" %}
+    <th> merkitse tehdyksi </th>
+    {% endif %}
   </tr>
- 
       {% for task in tasklist %}
       <tr>
       <th> {{ task[0] }} </th>
       <th> {{ task[1] }}</th>
       <th> {{ task[2] }}</th>
+      {% if session.user_role == "lapsi" %}
+      <form action="/home" method="post">
+        {%if task.done%}
+       <th><button class="update" name="update" value="{{ task.id }}">undone</button></th>
+       {%else%}
+       <th><button class="update" name="update" value="{{ task.id }}">done</button></th>
+        {%endif%}
+       
+    </form>
+      {% endif %}
   </tr>
 
 {% endfor %}

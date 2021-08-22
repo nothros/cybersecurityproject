@@ -18,7 +18,7 @@ def index():
         if family:
             familymembers = families.get_members(session["user_id"])
             date = datetime.datetime.now()
-            tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
+            tasklist = tasks.get_tasks(session["user_id"], session["user_role"], date)
             return render_template("home.html", familymembers=familymembers,
                                    date=date, tasklist=tasklist)
 
@@ -108,15 +108,15 @@ def nofamily():
 
 @app.route("/family", methods=["GET", "POST"])
 def family():
-    familyname = families.get_familyname(session["user_id"])
     if request.method == "GET":
+        familyname = families.get_familyname(session["user_id"])
         familymembers = families.get_members(session["user_id"])
         return render_template("family.html", familymembers=familymembers, familyname=familyname)
     if request.method == "POST":
         remove_userid = request.form["delete"]
         users.remove_user(remove_userid)
 
-
+        familyname = families.get_familyname(session["user_id"])
         familymembers = families.get_members(session["user_id"])
         return render_template("family.html", familymembers=familymembers, familyname=familyname)
 
@@ -126,37 +126,36 @@ def family():
 @app.route("/home", methods=["GET", "POST"])
 def home():
     familymembers = families.get_members(session["user_id"])
-    date = datetime.datetime.now()
-    tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
+    today = datetime.date.today()
+    tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
     if request.method == "GET":
         return render_template("home.html", familymembers=familymembers,
-                               date=date, tasklist=tasklist)
+                               date=today, tasklist=tasklist)
 
     if request.method == "POST":
-        task = request.form["task"]
-        doer_id = request.form["doer"]
+        if session["user_role"] == "aikuinen":
+            task = request.form["task"]
+            doer_id = request.form["doer"]
+            deadline = request.form["deadline"]
+            tasks.add_task(task, session["user_id"], doer_id, deadline)
+        else:
+            print("EI AIKUINEN")
+            done_task = request.form["update"]
+            tasks.do_task(done_task)
 
-        deadline = request.form["deadline"]
-        tasks.add_task(task, session["user_id"], doer_id, deadline)
 
         familymembers = families.get_members(session["user_id"])
-        date = datetime.datetime.now()
+        today = datetime.date.today()
         tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
-        return render_template("home.html", familymembers=familymembers, date=date, tasklist=tasklist)
-
+        return render_template("home.html", familymembers=familymembers, date=today, tasklist=tasklist)
 
 @app.route("/tasklist", methods=["GET", "POST"])
 def tasklist():
-    tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
-    print(tasklist)
-    if request.method == "GET":
-        return render_template("tasklist.html", tasklist=tasklist)
     if request.method == "POST":
         removable_task_id = request.form["delete"]
-        print(tasklist)
         tasks.delete_task(removable_task_id)
-        tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
-        return render_template("tasklist.html", tasklist=tasklist)
+    tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
+    return render_template("tasklist.html", tasklist=tasklist)
 
 
 
@@ -186,8 +185,11 @@ def settings():
 
 
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(e):
     return render_template('404.html'), 404
+
+
+
 
 @app.route("/logout")
 def logout():
