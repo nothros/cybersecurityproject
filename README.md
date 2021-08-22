@@ -103,6 +103,7 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä. Lapsen toiminta sovel
 - Asetukset- sivu uupuu
 - Yksi tietokantataulu (tasklists) putosi huonon suunnittelun tuloksena. Tilalle on tulossa status- taulu, jolla tehtyjen tehtävien statukset selkeyttää näkymää
 - Oikeuksissa puutteita (Toteutettu hassusti ilman tokenia, korjataan)
+- Mikäli palataan sivulle, jonne ei ole oikeutta, ei tulekaan 404- sivua. Korjataan.
 - Tietoturvaa en ole tarkastellut
 - Koodin muotoilu ei ole lopullinen
 
