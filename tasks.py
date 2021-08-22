@@ -14,7 +14,7 @@ def get_tasks(user_id, role, today = 0):
 
     else:
         if today != 0:
-            sql = "SELECT T.task, U.name, T.deadline, T.id FROM tasks T, users U WHERE U.id = T.doer_id AND creator_id=:creator_id AND deadline=:deadline"
+            sql = "SELECT T.task, U.name, T.deadline, T.id FROM tasks T, users U WHERE U.id = T.doer_id AND creator_id=:creator_id AND deadline=:deadline ORDER BY T.done ASC"
             result = db.session.execute(sql, {"creator_id":user_id, "deadline":today})
             
             print(today)
@@ -38,7 +38,7 @@ def get_tasks_by_doer(doer_id):
     return tasks
 
 def get_tasks_by_date_and_doer(doer_id, today):
-    sql = "SELECT T.task, U.name, T.deadline, T.id, T.done FROM tasks T, users U WHERE U.id = T.doer_id AND doer_id=:doer_id AND T.deadline=:deadline"
+    sql = "SELECT T.task, U.name, T.deadline, T.id, T.done FROM tasks T, users U WHERE U.id = T.doer_id AND doer_id=:doer_id AND T.deadline=:deadline ORDER BY T.done ASC"
     result = db.session.execute(sql, {"doer_id":doer_id, "deadline":today})
     tasks = result.fetchall()
     if tasks == None:

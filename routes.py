@@ -7,7 +7,6 @@ from flask.globals import session
 from app import app
 
 
-
 #DONE
 @app.route("/")
 def index():
@@ -17,11 +16,10 @@ def index():
         family = families.get_family(session["user_id"])
         if family:
             familymembers = families.get_members(session["user_id"])
-            date = datetime.datetime.now()
-            tasklist = tasks.get_tasks(session["user_id"], session["user_role"], date)
+            today = datetime.date.today()
+            tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
             return render_template("home.html", familymembers=familymembers,
-                                   date=date, tasklist=tasklist)
-
+                               date=today, tasklist=tasklist)
         else:
             if session["user_role"] == "aikuinen":
                 return render_template("/add_family.html", message="")
@@ -73,7 +71,7 @@ def register():
 
 
 
-@app.route("/nofamily", methods=["POST"])
+@app.route("/nofamily", methods=["GET","POST"])
 def nofamily():
     name = request.form["familyname"]
     code = request.form["code"]
@@ -102,14 +100,11 @@ def nofamily():
     return render_template("nofamily.html", message="väärin meni")
 
 
-
-
-
-
 @app.route("/family", methods=["GET", "POST"])
 def family():
     if request.method == "GET":
         familyname = families.get_familyname(session["user_id"])
+        print(familyname)
         familymembers = families.get_members(session["user_id"])
         return render_template("family.html", familymembers=familymembers, familyname=familyname)
     if request.method == "POST":
@@ -119,8 +114,6 @@ def family():
         familyname = families.get_familyname(session["user_id"])
         familymembers = families.get_members(session["user_id"])
         return render_template("family.html", familymembers=familymembers, familyname=familyname)
-
-
 
 
 @app.route("/home", methods=["GET", "POST"])
@@ -146,8 +139,9 @@ def home():
 
         familymembers = families.get_members(session["user_id"])
         today = datetime.date.today()
-        tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
+        tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
         return render_template("home.html", familymembers=familymembers, date=today, tasklist=tasklist)
+
 
 @app.route("/tasklist", methods=["GET", "POST"])
 def tasklist():
@@ -156,9 +150,6 @@ def tasklist():
         tasks.delete_task(removable_task_id)
     tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
     return render_template("tasklist.html", tasklist=tasklist)
-
-
-
 
 
 
