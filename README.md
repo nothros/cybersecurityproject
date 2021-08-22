@@ -1,7 +1,5 @@
 # joojoo!- TodoApp perheille
 
-# KESKEN (18.8)
-
 ![sovelluksen logo](https://raw.githubusercontent.com/nothros/ToDoApp-for-families/main/dokumentaatio/logo2.png)
 
 ## Sovelluksen käyttötarkoitus
@@ -19,6 +17,12 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä
 
 [Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md)
 
+[Toiminnallisuus](#toiminnallisuus)
+
+[Käyttöohje](#käyttöohje)
+
+[Puutteet](#puutteet)
+
 
 # Toiminnallisuus
 ### (22.8.2021)
@@ -32,8 +36,9 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä
 - NoFamily- näkymästä voi kirjautua ulos
 ### Päänäkymä 
 #### Koti
-- Voidaan lisätä kurssi (aikuinen) 
+- Voidaan lisätä uusi tehtävä (aikuinen) 
 - Päivän tehtävät näkyvät listana
+- Voidaan merkitä tehtävä tehdyksi ( lapsi)
 #### Tehtävät
 - Kaikkien käyttäjien tehtävät näkyvät (aikuinen)
 - Tehtäviä voidaan poistaa (aikuinen)
@@ -74,7 +79,7 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä
 - Pääsivulle päästessäsi, voit kirjautua ulos sivulta oikeasta yläkulmasta navigaatiopalkista.
 
 
-## III-viikkopalautuksen aikaiset kriittiset puutteet ja mahdolliset kehitysideat (22.8.2021)
+## Puutteet
 
 ### Puutteet jotka korjataan sovellukseen
 - Reititys ei toimi ( mikäli hakee sivua joka ei ole olemassa, tulee 404-error. Mutta muuten tulee ongelmia, jos ei ole sisäänkirjatunut. (tämän selvitän maanantaina)
