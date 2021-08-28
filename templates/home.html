@@ -2,49 +2,69 @@
 
 
 {% block content %}
-{% if session.user_role == "aikuinen" %}
-<form action="/home" method="post">
-    <p>Tehtävä</p>
-		<input type="text" name="task" placeholder="Anna tehtävä">
-    <select name="doer">
-    {% for member in familymembers %}
-      <option value="{{ member.id }}">{{ member[1] }}</option>
-    {% endfor %}
-    </select>
-     <input type="date" name="deadline" placeholder="{{ date }}"
-            value="{{ date }}"
-            min="2021-01-01" max="2021-12-31">
 
-            <input type="submit" name="" value="Lisää tehtävä!">
-</form>
-{% endif %}
-<table>
-  <tr>
-    <th>tehtävä</th>
-    <th>tekijä</th>
-    <th> pvm </th>
-    {% if session.user_role == "lapsi" %}
-    <th> merkitse tehdyksi </th>
+  {% if session.user_role == "aikuinen" %}
+  <p>LISÄÄ tehtävä</p>
+    <h1>{{message}}</h1>
+    <form action="/home" method="post">
+      <input type="text" name="task" placeholder="Anna tehtävä">
+      <select name="doer">
+      {% for member in familymembers %}
+        <option value="{{ member.id }}">{{ member[1] }}</option>
+      {% endfor %}
+      </select>
+      <input type="date" name="deadline" placeholder="{{ date }}" value="{{ date }}" min="2021-01-01" max="2021-12-31">
+      <input type="submit" name="" value="Lisää tehtävä!">
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    </form>
     {% endif %}
-  </tr>
+
+
+    <p>Päivän tehtävät</p>
+    {%if tasklist%}
+    <table>
+      <tr>
+        <th>tehtävä</th>
+        <th>tekijä</th>
+        <th> pvm </th>
+       
+        {% if session.user_role == "lapsi" %}
+          <th> merkitse tehdyksi </th>
+        {% endif %}
+      </tr>
+      {%else%}
+      <p>EI TEHTÄVIÄ!!</p>
+      {%endif%}
       {% for task in tasklist %}
       <tr>
-      <th> {{ task[0] }} </th>
-      <th> {{ task[1] }}</th>
-      <th> {{ task[2] }}</th>
-      {% if session.user_role == "lapsi" %}
-      <form action="/home" method="post">
-        {%if task.done%}
-       <th><button class="update" name="update" value="{{ task.id }}">undone</button></th>
-       {%else%}
-       <th><button class="update" name="update" value="{{ task.id }}">done</button></th>
-        {%endif%}
-       
-    </form>
-      {% endif %}
-  </tr>
+        <th> {{ task[0] }} </th>
+        <th> {{ task[1] }}</th>
+        <th> {{ task[2] }}</th>
+        {% if session.user_role == "lapsi" %}
+          <form action="/home" method="post">
+          {%if task.done%}
+            <th><button class="update" name="update" value="{{ task.id }}">undone</button></th>
+          {%else%}
+          <th><button class="update" name="update" value="{{ task.id }}">done</button></th>
+          {%endif%}
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          </form>
+        {% endif %}
+      </tr>
+      {% endfor %}
+      </table>
 
-{% endfor %}
-</table>
+    
+    {% if session.user_role == "lapsi" %}
 
+
+    <h1>The progress element</h1>
+
+    <label for="file">Downloading progress:</label>
+    <progress id="file" value="32" max="100"> 32% </progress>
+
+
+
+
+    {% endif %}
 {% endblock %}

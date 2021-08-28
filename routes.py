@@ -10,16 +10,16 @@ from app import app
 #DONE
 @app.route("/")
 def index():
-    if len(users.get_user()) < 2:
+    if not allow():
         return render_template("/login.html", message="")
     else:
+        message = ""
         family = families.get_family(session["user_id"])
         if family:
             familymembers = families.get_members(session["user_id"])
             today = datetime.date.today()
             tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
-            return render_template("home.html", familymembers=familymembers,
-                               date=today, tasklist=tasklist)
+            return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist)
         else:
             if session["user_role"] == "aikuinen":
                 return render_template("/add_family.html", message="")
@@ -29,7 +29,10 @@ def index():
 #DONE
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    
     if request.method == "GET":
+        if allow():
+            redirect("/")
         return render_template("login.html", message="")
 
     if request.method == "POST":
@@ -44,6 +47,8 @@ def login():
 #DONE
 @app.route("/signup", methods=["GET", "POST"])
 def register():
+    if allow():
+        redirect("/")
     if request.method == "GET":
         return render_template("signup.html", message="")
 
@@ -102,7 +107,10 @@ def nofamily():
 
 @app.route("/family", methods=["GET", "POST"])
 def family():
+    if not allow():
+        return render_template('404.html'), 404
     if request.method == "GET":
+
         familyname = families.get_familyname(session["user_id"])
         print(familyname)
         familymembers = families.get_members(session["user_id"])
@@ -118,33 +126,47 @@ def family():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
+    if not allow():
+        return render_template('404.html'), 404
+    message = ""
     familymembers = families.get_members(session["user_id"])
     today = datetime.date.today()
     tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
     if request.method == "GET":
-        return render_template("home.html", familymembers=familymembers,
-                               date=today, tasklist=tasklist)
+        return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist)
 
     if request.method == "POST":
         if session["user_role"] == "aikuinen":
+            if session["csrf_token"] != request.form["csrf_token"]:
+                abort(403)
             task = request.form["task"]
             doer_id = request.form["doer"]
             deadline = request.form["deadline"]
+
+
+            if (task == "" or deadline == ""):
+                message = message +"Syötä tehtävä ja päivämäärä"
+                return render_template("home.html", message = message, familymembers=familymembers, date=today, tasklist=tasklist)
+
+            print(message)
             tasks.add_task(task, session["user_id"], doer_id, deadline)
         else:
-            print("EI AIKUINEN")
             done_task = request.form["update"]
+            if session["csrf_token"] != request.form["csrf_token"]:
+                abort(403)
             tasks.do_task(done_task)
 
 
         familymembers = families.get_members(session["user_id"])
         today = datetime.date.today()
         tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
-        return render_template("home.html", familymembers=familymembers, date=today, tasklist=tasklist)
+        return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist)
 
 
 @app.route("/tasklist", methods=["GET", "POST"])
 def tasklist():
+    if not allow():
+        return render_template('404.html'), 404
     if request.method == "POST":
         removable_task_id = request.form["delete"]
         tasks.delete_task(removable_task_id)
@@ -162,6 +184,8 @@ def tasklist():
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
+    if not allow():
+        return render_template('404.html'), 404
     if request.method == "GET":
         return render_template("settings.html")
 
@@ -184,5 +208,11 @@ def page_not_found(e):
 
 @app.route("/logout")
 def logout():
+    if not allow():
+        return render_template('404.html'), 404
     users.logout()
     return redirect("/")
+
+
+def allow():
+    return len(users.get_user()) > 2

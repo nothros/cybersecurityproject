@@ -3,6 +3,7 @@
 
 {% block content %}
 <h1>{{familyname}}</h1>
+
 {% if session.user_role == "aikuinen" %}
 <form action="/family" method="post">
     <table>
