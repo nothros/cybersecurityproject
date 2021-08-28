@@ -21,6 +21,7 @@
       <th> {{ task[2] }}</th>
       {% if session.user_role == "aikuinen" %}
       <th><button class="delete" name="delete" value="{{ task.id }}">delete</button></th>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       {% endif %}
       {% endfor %}
   </tr>

@@ -11,11 +11,12 @@ from app import app
 @app.route("/")
 def index():
     if not allow():
+        print("JOO EI SOPII")
         return render_template("/login.html", message="")
     else:
+        print("JOO SOPII")
         message = ""
-        family = families.get_family(session["user_id"])
-        if family:
+        if families.user_have_family(session["user_id"]):
             familymembers = families.get_members(session["user_id"])
             today = datetime.date.today()
             tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
@@ -29,9 +30,9 @@ def index():
 #DONE
 @app.route("/login", methods=["GET", "POST"])
 def login():
-    
     if request.method == "GET":
         if allow():
+            print("JOO SOPII")
             redirect("/")
         return render_template("login.html", message="")
 
@@ -78,37 +79,34 @@ def register():
 
 @app.route("/nofamily", methods=["GET","POST"])
 def nofamily():
+    if not allow() or families.user_have_family(session["user_id"]):
+        return redirect("/")
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     name = request.form["familyname"]
     code = request.form["code"]
     if session["user_role"] == "aikuinen":
-        if code == "":
-            return render_template("add_family.html", message="Anna salasana!")
-        if len(name) < 2 or len(name) > 30:
-            return render_template("add_family.html", message="Nimen tulee olla 2-30 merkkiä")
-
+        if len(name) < 2 or len(name) > 30 or code =="":
+            return render_template("add_family.html", message="Nimi tai salasana virheellinen!")
         if families.add_family(name, code, session["user_id"]):
-
             return redirect("/")
         else:
             return render_template("add_family.html", message="Käyttäjätunnus käytössä!")
     else:
-        if code == "":
-            return render_template("join_family.html", message="Anna salasana!")
-        if len(name) < 2 or len(name) > 30:
-            return render_template("join_family.html", message="Nimen tulee olla 2-30 merkkiä")
-
+        if len(name) < 2 or len(name) > 30 or code =="":
+            return render_template("join_family.html", message="Nimi tai salasana virheellinen!")
         if families.join_family(name, code, session["user_id"]):
             return redirect("/")
         else:
-            return render_template("join_family.html", message="Käyttäjätunnus käytössä!")
+            return render_template("join_family.html", message="Nimi tai salasana virheellinen!")
 
-    return render_template("nofamily.html", message="väärin meni")
+    return redirect("/")
 
 
 @app.route("/family", methods=["GET", "POST"])
 def family():
-    if not allow():
-        return render_template('404.html'), 404
+    if not allow() or not families.user_have_family(session["user_id"]):
+        return redirect("/")
     if request.method == "GET":
 
         familyname = families.get_familyname(session["user_id"])
@@ -116,6 +114,8 @@ def family():
         familymembers = families.get_members(session["user_id"])
         return render_template("family.html", familymembers=familymembers, familyname=familyname)
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         remove_userid = request.form["delete"]
         users.remove_user(remove_userid)
 
@@ -126,7 +126,7 @@ def family():
 
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    if not allow():
+    if not allow() or not families.user_have_family(session["user_id"]):
         return render_template('404.html'), 404
     message = ""
     familymembers = families.get_members(session["user_id"])
@@ -165,9 +165,11 @@ def home():
 
 @app.route("/tasklist", methods=["GET", "POST"])
 def tasklist():
-    if not allow():
-        return render_template('404.html'), 404
+    if not allow() or not families.user_have_family(session["user_id"]):
+        return redirect("/")
     if request.method == "POST":
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         removable_task_id = request.form["delete"]
         tasks.delete_task(removable_task_id)
     tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
@@ -184,8 +186,8 @@ def tasklist():
 
 @app.route("/settings", methods=["GET", "POST"])
 def settings():
-    if not allow():
-        return render_template('404.html'), 404
+    if not allow() or not families.user_have_family(session["user_id"]):
+        return redirect("/")
     if request.method == "GET":
         return render_template("settings.html")
 
@@ -209,10 +211,11 @@ def page_not_found(e):
 @app.route("/logout")
 def logout():
     if not allow():
-        return render_template('404.html'), 404
+        return redirect("/")
     users.logout()
     return redirect("/")
 
 
 def allow():
+    print(len(users.get_user()) > 2)
     return len(users.get_user()) > 2

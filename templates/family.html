@@ -23,6 +23,7 @@
             <th> {{ member[1] }} </th>
             <th>{{ member[2] }}</th>
             <th><button class="delete" name="delete" value="{{ member.id }}">Delete</button></th>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             {% endif %}
             {% endfor %}
         </tr>

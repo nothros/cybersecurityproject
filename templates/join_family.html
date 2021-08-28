@@ -10,7 +10,7 @@
     <p></p>Syötä vanhemmalta saamasi koodi</p>
     <input type="text" name="code" placeholder="Anna koodi">
 </br>
-
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" name="" value="Liity perheeseen">
 </form>
 <a href="/logout"> Kirjaudu ulos</a>

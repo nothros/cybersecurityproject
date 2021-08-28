@@ -28,7 +28,15 @@ def join_family(name, code, user_id):
         else:
             return False
     return True
-    
+
+def user_have_family(memberid):
+    sql = "SELECT id FROM familymembers WHERE member_id=:member_id"
+    result = db.session.execute(sql, {"member_id":memberid})
+    family = result.fetchone()
+    if family == None:
+        return False
+    return True
+
 def get_family(memberid):
     sql = "SELECT * FROM familymembers WHERE member_id=:member_id"
     result = db.session.execute(sql, {"member_id":memberid})

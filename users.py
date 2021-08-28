@@ -2,6 +2,7 @@ from db import db
 from flask import session, abort, request
 from werkzeug.security import check_password_hash, generate_password_hash
 import os
+import secrets
 
 def login(username,password):
     sql = "SELECT * FROM users WHERE username=:username"
@@ -46,3 +47,4 @@ def logout():
     del session["user_username"]
     del session["user_role"]
     del session["user_name"]
+    del session["csrf_token"]

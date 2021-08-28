@@ -10,7 +10,7 @@
     <br>
     <input type="text" name="code" placeholder="Anna kirjautumiskoodi">
 
-
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" name="" value="Lisää perhe">
 </form>
 <a href="/logout"> Kirjaudu ulos</a>
