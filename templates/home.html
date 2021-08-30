@@ -2,15 +2,19 @@
 
 
 {% block content %}
-
+<div class = "add_task">
   {% if session.user_role == "aikuinen" %}
-  <p>LISÄÄ tehtävä</p>
-    <h1>{{message}}</h1>
+  <h1>Lisää tehtävä</h1>
+    <h2>{{message}}</h2>
     <form action="/home" method="post">
       <input type="text" name="task" placeholder="Anna tehtävä">
       <select name="doer">
       {% for member in familymembers %}
+      {% if member.id == session["user_id"]%}
+       
+        {%else%}
         <option value="{{ member.id }}">{{ member[1] }}</option>
+        {% endif %}
       {% endfor %}
       </select>
       <input type="date" name="deadline" placeholder="{{ date }}" value="{{ date }}" min="2021-01-01" max="2021-12-31">
@@ -18,41 +22,53 @@
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
     {% endif %}
+</div>
+    
 
 
-    <p>Päivän tehtävät</p>
+  <div class = "task_table">
+
+    <h1>Päivän tehtävät</h1>
+    <div id="table-scroll">
+      <table cellspacing='0'>
     {%if tasklist%}
-    <table>
+
+        <thead>
       <tr>
         <th>tehtävä</th>
         <th>tekijä</th>
         <th> pvm </th>
+        <th> status</th>
        
         {% if session.user_role == "lapsi" %}
           <th> merkitse tehdyksi </th>
         {% endif %}
       </tr>
+    </thead>
       {%else%}
-      <p>EI TEHTÄVIÄ!!</p>
+      <h1>EI TEHTÄVIÄ!!</h1>
       {%endif%}
       {% for task in tasklist %}
       <tr>
         <th> {{ task[0] }} </th>
         <th> {{ task[1] }}</th>
         <th> {{ task[2] }}</th>
+        <th><status  color: #232323;>{{ task.task_status }}</status> </th>
         {% if session.user_role == "lapsi" %}
           <form action="/home" method="post">
           {%if task.done%}
-            <th><button class="update" name="update" value="{{ task.id }}">undone</button></th>
+            <th><button class="update" name="update" value="{{ task.id }}">Eiku!</button></th>
           {%else%}
-          <th><button class="update" name="update" value="{{ task.id }}">done</button></th>
+          <th><button class="update" name="update" value="{{ task.id }}">Tehty!</button></th>
           {%endif%}
           <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
           </form>
         {% endif %}
+        
       </tr>
       {% endfor %}
       </table>
+    </div>
 
     
     {% if session.user_role == "lapsi" %}
@@ -62,9 +78,7 @@
 
     <label for="file">Downloading progress:</label>
     <progress id="file" value="32" max="100"> 32% </progress>
-
-
-
-
+  
     {% endif %}
+  </div>
 {% endblock %}

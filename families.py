@@ -9,7 +9,6 @@ def add_family(name, code, user_id):
         db.session.commit()
     except:
         return False
-        
     join_family(name, code, user_id)
     return True
 
@@ -45,16 +44,16 @@ def get_family(memberid):
         return False
     return family
 
-def get_familyname(familyid):
-    sql = "SELECT * FROM families WHERE id=:id"
-    result = db.session.execute(sql, {"id":familyid})
-    family = result.fetchone()
-    if family == None:
+def get_familyname(memberid):
+    sql = "SELECT F.familyname FROM families F, familymembers M WHERE F.id = M.family_id AND M.member_id =:memberid"
+    result = db.session.execute(sql, {"memberid":memberid})
+    familyname = result.fetchone()
+    if familyname == None:
         return False
-    return family.familyname
+    return familyname[0]
 
 def get_members(userid):
-    sql = "SELECT U.id, U.name, U.role FROM Users U, (SELECT * FROM familymembers WHERE member_id=:id) member1, familymembers member2 WHERE member1.family_id = member2.family_id AND  U.id = member2.member_id"
+    sql = "SELECT U.id, U.name, U.role FROM users U, (SELECT * FROM familymembers WHERE member_id=:id) member1, familymembers member2 WHERE member1.family_id = member2.family_id AND  U.id = member2.member_id"
     result = db.session.execute(sql, {"id":userid})
     members = result.fetchall()
     return members

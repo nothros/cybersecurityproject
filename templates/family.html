@@ -2,17 +2,21 @@
 
 
 {% block content %}
+<div class = "task_table">
 <h1>{{familyname}}</h1>
 
 {% if session.user_role == "aikuinen" %}
 <form action="/family" method="post">
-    <table>
+
+  <div id="table-scroll">
+    <table cellspacing='0'>
+  <thead>
         <tr>
           <th>nimi</th>
           <th>rooli</th>
           <th>poista</th>
         </tr>
-      
+  </thead>
             {% for member in familymembers %}
             <tr>
             {% if member.id == session["user_id"]%}
@@ -22,7 +26,7 @@
             {% else %}
             <th> {{ member[1] }} </th>
             <th>{{ member[2] }}</th>
-            <th><button class="delete" name="delete" value="{{ member.id }}">Delete</button></th>
+            <th><button class="delete" name="delete" value="{{ member.id }}">Poista!</button></th>
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             {% endif %}
             {% endfor %}
@@ -30,12 +34,13 @@
    
 </form>
 {%else%}
-<table>
+<table cellspacing='0'>
+  <thead>
     <tr>
       <th>nimi</th>
       <th>rooli</th>
     </tr>
-   
+  </thead>
         {% for member in familymembers %}
         <tr>
         <th> {{ member[1] }} </th>
@@ -43,6 +48,9 @@
     </tr>
 
 {% endfor %}
-{% endif %}
 </table>
+</div>
+{% endif %}
+
+</div>
 {% endblock %}

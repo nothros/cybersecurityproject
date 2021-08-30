@@ -2,7 +2,7 @@ import datetime
 import users
 import families
 import tasks
-from flask import redirect, render_template, request
+from flask import redirect, render_template, request, abort
 from flask.globals import session
 from app import app
 
@@ -10,6 +10,7 @@ from app import app
 #DONE
 @app.route("/")
 def index():
+
     if not allow():
         print("JOO EI SOPII")
         return render_template("/login.html", message="")
@@ -127,7 +128,7 @@ def family():
 @app.route("/home", methods=["GET", "POST"])
 def home():
     if not allow() or not families.user_have_family(session["user_id"]):
-        return render_template('404.html'), 404
+        return redirect("/")
     message = ""
     familymembers = families.get_members(session["user_id"])
     today = datetime.date.today()
@@ -145,7 +146,7 @@ def home():
 
 
             if (task == "" or deadline == ""):
-                message = message +"Syötä tehtävä ja päivämäärä"
+                message = "Syötä tehtävä ja päivämäärä"
                 return render_template("home.html", message = message, familymembers=familymembers, date=today, tasklist=tasklist)
 
             print(message)
@@ -167,9 +168,15 @@ def home():
 def tasklist():
     if not allow() or not families.user_have_family(session["user_id"]):
         return redirect("/")
+    if request.method == "GET":
+        task_expired = tasks.get_status_if_late(session["user_id"])
+        for task in task_expired:
+            tasks.update_task_status_expired(task[0])
+        
     if request.method == "POST":
         if session["csrf_token"] != request.form["csrf_token"]:
             abort(403)
+        
         removable_task_id = request.form["delete"]
         tasks.delete_task(removable_task_id)
     tasklist = tasks.get_tasks(session["user_id"], session["user_role"])
@@ -217,5 +224,4 @@ def logout():
 
 
 def allow():
-    print(len(users.get_user()) > 2)
     return len(users.get_user()) > 2

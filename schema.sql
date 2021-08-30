@@ -10,7 +10,7 @@ CREATE TABLE families (
     id SERIAL PRIMARY KEY,
     familyname TEXT UNIQUE,
     code TEXT
- );
+);
 
 CREATE TABLE familymembers (
     id SERIAL PRIMARY KEY,
@@ -28,6 +28,7 @@ CREATE TABLE tasks (
     task TEXT,
     deadline DATE,
     done BOOLEAN DEFAULT false,
+    task_status TEXT DEFAULT 'tekemättä',
     FOREIGN KEY (creator_id) REFERENCES users,
     FOREIGN KEY (doer_id) REFERENCES users
     ON DELETE CASCADE
