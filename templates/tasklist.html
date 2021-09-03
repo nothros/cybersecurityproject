@@ -4,7 +4,9 @@
 {% block content %}
 
 <div class = "task_table">
+ 
   <h1>Kaikki tehtävät</h1>
+  {%if tasklist%}
   <div id="table-scroll">
     <table cellspacing='0'>
   <thead>
@@ -37,7 +39,12 @@
 
 
 </table>
+
+
   </div>
+  {%else%}
+      <h1>EI TEHTÄVIÄ!!</h1>
+      {%endif%}
 </div>
 
 {% endblock %}

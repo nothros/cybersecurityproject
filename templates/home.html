@@ -2,12 +2,13 @@
 
 
 {% block content %}
-<div class = "add_task">
+
   {% if session.user_role == "aikuinen" %}
+  <div class = "add_task">
   <h1>Lisää tehtävä</h1>
     <h2>{{message}}</h2>
     <form action="/home" method="post">
-      <input type="text" name="task" placeholder="Anna tehtävä">
+      <input type="text" name="task" placeholder="Anna tehtävä (max.20 merkkiä">
       <select name="doer">
       {% for member in familymembers %}
       {% if member.id == session["user_id"]%}
@@ -21,8 +22,9 @@
       <input type="submit" name="" value="Lisää tehtävä!">
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
+  </div>
     {% endif %}
-</div>
+
     
 
 
@@ -53,7 +55,7 @@
         <th> {{ task[0] }} </th>
         <th> {{ task[1] }}</th>
         <th> {{ task[2] }}</th>
-        <th><status  color: #232323;>{{ task.task_status }}</status> </th>
+        <th>{{ task.task_status }}</th>
         {% if session.user_role == "lapsi" %}
           <form action="/home" method="post">
           {%if task.done%}
@@ -70,15 +72,16 @@
       </table>
     </div>
 
-    
+    {%if tasklist%}
     {% if session.user_role == "lapsi" %}
-
-
-    <h1>The progress element</h1>
-
-    <label for="file">Downloading progress:</label>
-    <progress id="file" value="32" max="100"> 32% </progress>
-  
+    {%if count_done_tasks/tasklist|length*100==100%}
+    <h1>Kaikki päivän tehtävät tehty!</h1>
+    {%else%}
+    <h1>Tehtävistä tehty</h1>
+    {%endif%}
+    <progress id="file" value={{count_done_tasks/tasklist|length*100}} max="100"> {{count_done_tasks/tasklist|length*100}}%</progress>
+    <h1>{{count_done_tasks/tasklist|length*100}}%</h1>
     {% endif %}
+    {%endif%}
   </div>
 {% endblock %}

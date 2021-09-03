@@ -6,34 +6,27 @@ from flask import redirect, render_template, request, abort
 from flask.globals import session
 from app import app
 
-
-#DONE
 @app.route("/")
 def index():
-
+    message = ""
     if not allow():
-        print("JOO EI SOPII")
-        return render_template("/login.html", message="")
-    else:
-        print("JOO SOPII")
-        message = ""
-        if families.user_have_family(session["user_id"]):
-            familymembers = families.get_members(session["user_id"])
-            today = datetime.date.today()
-            tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
-            return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist)
-        else:
-            if session["user_role"] == "aikuinen":
-                return render_template("/add_family.html", message="")
-            else:
-                return render_template("/join_family.html", message="")
+        return render_template("/login.html", message=message)
+    if not families.user_have_family(session["user_id"]):
+        if session["user_role"] == "aikuinen":
+            return render_template("/add_family.html", message=message)
+        return render_template("/join_family.html", message=message)
+
+    familymembers = families.get_members(session["user_id"])
+    today = datetime.date.today()
+    tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
+    count_done_tasks = tasks.count_today_done_tasks_by_user(session["user_id"], today)[0][0]
+    return render_template("home.html", message=message, familymembers=familymembers, date=today, tasklist=tasklist, count_done_tasks=count_done_tasks)
 
 #DONE
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "GET":
         if allow():
-            print("JOO SOPII")
             redirect("/")
         return render_template("login.html", message="")
 
@@ -59,16 +52,9 @@ def register():
         name = request.form["name"]
         password = request.form["password"]
         role = request.form["role"]
-
-        if len(username) < 3 or len(username) > 15:
-            return render_template("signup.html",
-                                  message="Käyttäjätunnuksessa tulee olla 3-15 merkkiä")
-        if len(name) < 2 or len(name) > 30:
-            return render_template("signup.html", message="Nimen tulee olla 2-30 merkkiä")
-        if password == "":
-            return render_template("signup.html", message="Anna salasana!")
-        if role != "aikuinen" and role != "lapsi":
-            return render_template("signup.html", message="Anna rooli")
+        message = "Täytä kaikki kentät oikein!"
+        if len(username) < 3 or len(username) > 15 or len(name) < 2 or len(name) > 30 or password == "":
+            return render_template("signup.html", message=message)
         if users.register(username, name, password, role):
             return redirect("/")
         else:
@@ -129,12 +115,16 @@ def family():
 def home():
     if not allow() or not families.user_have_family(session["user_id"]):
         return redirect("/")
+   
     message = ""
     familymembers = families.get_members(session["user_id"])
     today = datetime.date.today()
     tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
+    
+    count_done_tasks = tasks.count_today_done_tasks_by_user(session["user_id"], today)[0][0]
+
     if request.method == "GET":
-        return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist)
+        return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist, count_done_tasks=count_done_tasks)
 
     if request.method == "POST":
         if session["user_role"] == "aikuinen":
@@ -144,10 +134,10 @@ def home():
             doer_id = request.form["doer"]
             deadline = request.form["deadline"]
 
-
-            if (task == "" or deadline == ""):
-                message = "Syötä tehtävä ja päivämäärä"
-                return render_template("home.html", message = message, familymembers=familymembers, date=today, tasklist=tasklist)
+            if (task == "" or deadline == "" or len(task)>20):
+                message = "Syötä tehtävä(max.20 merkkiä) ja päivämäärä"
+                count_done_tasks = tasks.count_done_tasks(session["user_id"], today)[0][0]
+                return render_template("home.html", message = message, familymembers=familymembers, date=today, tasklist=tasklist,count_done_tasks=count_done_tasks)
 
             print(message)
             tasks.add_task(task, session["user_id"], doer_id, deadline)
@@ -161,7 +151,8 @@ def home():
         familymembers = families.get_members(session["user_id"])
         today = datetime.date.today()
         tasklist = tasks.get_tasks(session["user_id"], session["user_role"], today)
-        return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist)
+        count_done_tasks = tasks.count_today_done_tasks_by_user(session["user_id"], today)[0][0]
+        return render_template("home.html", message = "", familymembers=familymembers, date=today, tasklist=tasklist,count_done_tasks=count_done_tasks)
 
 
 @app.route("/tasklist", methods=["GET", "POST"])
