@@ -24,7 +24,7 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä. Lapsen toiminta sovel
 
 [Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md) (linkki ohjaa toiseen tiedostoon)
 
-[Tietokantakaavio](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/schema.png) (linkki ohjaa toiseen tiedostoon)
+[Tietokantakaavio](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/schemapic2.png) (linkki ohjaa toiseen tiedostoon)
 
 # Toiminnallisuus
 
