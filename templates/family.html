@@ -1,56 +1,49 @@
 {% extends "main.html" %}
 
-
 {% block content %}
 <div class = "task_table">
-<h1>{{familyname}}</h1>
+  <h1>{{familyname}}</h1>
+  {% if session.user_role == "aikuinen" %}
+    <p> Täällä voit poistaa muita perheenjäseniä perheestä</p>
+    <p> Huomaa ettei perheenjäsentä voida palauttaa ja hänen käyttäjätunnuksensa katoaa</p>
+    <p> Mikäli poistat itsesi, poistat myös perheesi! </p>
 
-{% if session.user_role == "aikuinen" %}
-<form action="/family" method="post">
-
-  <div id="table-scroll">
-    <table cellspacing='0'>
-  <thead>
+    <form action="/family" method="post">
+      <div id="table-scroll">
+      <table cellspacing='0'>
+      <thead>
         <tr>
           <th>nimi</th>
           <th>rooli</th>
           <th>poista</th>
         </tr>
-  </thead>
-            {% for member in familymembers %}
-            <tr>
-            {% if member.id == session["user_id"]%}
-            <th> {{ member[1] }} </th>
-            <th> {{ member[2] }}</th>
-            <th></th>
-            {% else %}
-            <th> {{ member[1] }} </th>
-            <th>{{ member[2] }}</th>
-            <th><button class="delete" name="delete" value="{{ member.id }}">Poista!</button></th>
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            {% endif %}
-            {% endfor %}
-        </tr>
-   
-</form>
-{%else%}
-<table cellspacing='0'>
-  <thead>
-    <tr>
-      <th>nimi</th>
-      <th>rooli</th>
-    </tr>
-  </thead>
-        {% for member in familymembers %}
-        <tr>
+      </thead>
+      {% for member in familymembers %}
+      <tr>
         <th> {{ member[1] }} </th>
         <th> {{ member[2] }}</th>
-    </tr>
-
-{% endfor %}
-</table>
+        <th><button class="delete" name="delete" value="{{ member.id }}">Poista!</button></th>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      {% endfor %}
+      </tr>
+    </form>
+  {%else%}
+  <table cellspacing='0'>
+    <thead>
+      <tr>
+        <th>nimi</th>
+        <th>rooli</th>
+      </tr>
+    </thead>
+    {% for member in familymembers %}
+      <tr>
+        <th> {{ member[1] }} </th>
+        <th> {{ member[2] }}</th>
+      </tr>
+    {% endfor %}
+  </table>
 </div>
 {% endif %}
-
 </div>
+
 {% endblock %}

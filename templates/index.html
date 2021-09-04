@@ -1,21 +1,21 @@
 <!doctype html>
+<html>
     <head>
-        <title> Login form</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>joojoo</title>
         <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css') }}"/>
         <body>
-			
 			<div class="bg">
-			
-			<div class="laatikko">
-<div class="logokuva"></div>
-<div class="tekstilaatikko">
+			    <div class="laatikko">
+                    <div class="logokuva"></div>
+                <div class="tekstilaatikko">
 
-    <p><i> Sovellus kotitöiden jakamiseen perheen kesken! </i> </p>
-</div>
-{% block content %}{% endblock %}
-
-</div>          
-</div>
+                    <p><i> Sovellus kotitöiden jakamiseen perheen kesken! </i> </p>
+                </div>
+                {% block content %}{% endblock %}
+                </div>
+            </div>
         </body>
     </head>
 </html>

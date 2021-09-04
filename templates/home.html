@@ -12,7 +12,6 @@
       <select name="doer">
       {% for member in familymembers %}
       {% if member.id == session["user_id"]%}
-       
         {%else%}
         <option value="{{ member.id }}">{{ member[1] }}</option>
         {% endif %}
@@ -25,23 +24,17 @@
   </div>
     {% endif %}
 
-    
-
-
   <div class = "task_table">
-
     <h1>Päivän tehtävät</h1>
     <div id="table-scroll">
       <table cellspacing='0'>
     {%if tasklist%}
-
         <thead>
       <tr>
         <th>tehtävä</th>
         <th>tekijä</th>
         <th> pvm </th>
         <th> status</th>
-       
         {% if session.user_role == "lapsi" %}
           <th> merkitse tehdyksi </th>
         {% endif %}
@@ -66,7 +59,6 @@
           <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
           </form>
         {% endif %}
-        
       </tr>
       {% endfor %}
       </table>

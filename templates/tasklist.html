@@ -1,10 +1,8 @@
 {% extends "main.html" %}
 
-
 {% block content %}
 
 <div class = "task_table">
- 
   <h1>Kaikki tehtävät</h1>
   {%if tasklist%}
   <div id="table-scroll">
@@ -30,21 +28,19 @@
       {% if session.user_role == "aikuinen" %}
       <th><button class="delete" name="delete" value="{{ task.id }}">Poista!</button></th>
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-      
       {% endif %}
       {% endfor %}
-     
   </tr>
   </form>
-
-
 </table>
-
-
-  </div>
+</div>
   {%else%}
       <h1>EI TEHTÄVIÄ!!</h1>
       {%endif%}
+      {%if tasklist%}
+      {% if session.user_role == "aikuinen" %}
+      <p> Yhteensä {{all_tasks_count}} tehtävää, joista {{late_tasks_count}} myöhässä ja {{done_tasks_count}} tehty</p>
+      {% endif %}
+  {% endif %}
 </div>
-
 {% endblock %}

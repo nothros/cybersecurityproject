@@ -3,17 +3,17 @@
 {% block content %}
 <div class = "nofamily">
     <h2>{{message}}</h2>
-<form action="/nofamily" method="POST">
-    <h1>Lisää uusi perhe</h1>
-    <p>Keksi perheellesi nimi ja koodi joiden avulla muut voivat kirjautua</p>
-    <input type="text" name="familyname" placeholder="Anna perheelle nimi (2-30)">
-    <br>
-    <input type="text" name="code" placeholder="Anna kirjautumiskoodi">
+    <form action="/nofamily" method="POST">
+        <h1>Lisää uusi perhe</h1>
+        <p>Keksi perheellesi nimi ja koodi joiden avulla muut voivat kirjautua</p>
+        <input type="text" name="familyname" placeholder="Anna perheelle nimi (2-30)">
+        <br>
+        <input type="text" name="code" placeholder="Anna kirjautumiskoodi">
 
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    <input type="submit" name="" value="Lisää perhe">
-</form>
-<a href="/logout"> Kirjaudu ulos</a>
+        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+        <input type="submit" name="" value="Lisää perhe">
+    </form>
+    <a href="/logout"> Kirjaudu ulos</a>
 </div>
 
 {% endblock %}
