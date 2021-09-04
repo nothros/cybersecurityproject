@@ -38,13 +38,11 @@ Kyseisessä luonnoksessa välissä oleva punainen viiva tarkoittaa, että riippu
 	- mikäli käyttäjätunnus on jo käytössä
 	- jokin kentistä on tyhjä
 	- salasana on liian lyhyt
-	- käyttäjätunnus on luotu onnistuneesti 
 
 ## Näkymä, kun perhettä ei ole luotu
 
 - Mikäli käyttäjä on vanhempi
 	- Voidaan luoda uusi perhe, perheelle annetaan nimi ja koodi, jolla perheeseen liitytään
-	- Annetaan hänelle mahdollisuus liittyä olevassa olevaan perheeseen koodilla
 - Mikäli käyttäjä on lapsi
 	- Annetaan hänelle mahdollisuus liittyä olevassa olevaan perheeseen koodilla
 Tästä näkymästä voidaan kirjautua ulos ja kirjautua eteenpäin itse sovellukseen.
@@ -64,6 +62,7 @@ Mikäli tehtäviä ei ole
 Mikäli tehtäviä on
 - Käyttäjä on lapsi
 	- Lapsi voi merkata tehtäviä tehdyksi
+	- Lapsi näkee tehtäväedistymisen palkissa
 - Käyttäjä on vanhempi
 	- Voi hän lisätä tehtäviä
 	- Näkee hän päivän tehtävät (myös kenelle tehtävät on osoitettu)
@@ -72,6 +71,7 @@ Mikäli tehtäviä on
 ### Tehtävät
 
 Kummatkin käyttäjät voivat tarkastella annettuja ja tulevia tehtäviä ja niiden päivämääriä, mutta ainoastaan vanhempi näkee kaikki tehtävät, sekä kenelle ne on osoitettu, lapsi näkee vain omat tehtävänsä.
+Aikuinen voi myös poistaa tehtäviä
 
 ### Perhe
 
@@ -80,13 +80,10 @@ Kummatkin käyttäjät voivat tarkastella annettuja ja tulevia tehtäviä ja nii
 - Käyttäjä on vanhempi
 	- Näkee perheenjäsenensä
 	- Voi poistaa perheenjäsenen
-	- Voi poistaa perheen
-	- Voi poistaa itsensä (koko perhe poistuu)
+	- Voi poistaa itsensä (jolloin perhe poistuu)
 
 
 ### Kirjaudu ulos
-- Käyttäjä saa alert:n että haluaako hän kirjautua ulos
-
 
 Tämän lisäksi on erillinen näkymä 404-sivuille.
 
