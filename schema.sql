@@ -3,21 +3,23 @@ CREATE TABLE users (
     username TEXT UNIQUE,
     name TEXT,
     password TEXT,
-    role TEXT
+    role TEXT,
+    visible BOOLEAN DEFAULT true
 );
 
 CREATE TABLE families (
     id SERIAL PRIMARY KEY,
     familyname TEXT UNIQUE,
-    code TEXT
+    code TEXT,
+    visible BOOLEAN DEFAULT true
 );
 
 CREATE TABLE familymembers (
     id SERIAL PRIMARY KEY,
-    family_id INTEGER,
     member_id INTEGER,
-    FOREIGN KEY (family_id) REFERENCES families,
-    FOREIGN KEY (member_id) REFERENCES users
+    family_id INTEGER,
+    FOREIGN KEY (member_id) REFERENCES users,
+    FOREIGN KEY (family_id) REFERENCES families
     ON DELETE CASCADE
 );
 
@@ -29,7 +31,8 @@ CREATE TABLE tasks (
     deadline DATE,
     done BOOLEAN DEFAULT false,
     task_status TEXT DEFAULT 'tekemättä',
-    FOREIGN KEY (creator_id) REFERENCES users,
+    FOREIGN KEY (creator_id) REFERENCES users
+    ON DELETE CASCADE,
     FOREIGN KEY (doer_id) REFERENCES users
     ON DELETE CASCADE
 );

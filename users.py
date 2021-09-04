@@ -16,6 +16,7 @@ def login(username,password):
             session["user_username"] = user.username
             session["user_role"] = user.role
             session["user_name"] = user.name
+            session["visible"] = user.visible
             session["csrf_token"] = secrets.token_hex(16)
             return True
         else:
@@ -38,13 +39,14 @@ def register(username, name, password, role):
     return True
 
 def remove_user(userid):
-        sql = "DELETE FROM users WHERE id=:id"
-        db.session.execute(sql, {"id":userid})
-        db.session.commit()
+    sql = "UPDATE users SET visible=false WHERE id =:userid"
+    db.session.execute(sql, {"userid":userid})
+    db.session.commit()
     
 def logout():
     del session["user_id"]
     del session["user_username"]
     del session["user_role"]
     del session["user_name"]
+    del session["visible"]
     del session["csrf_token"]
