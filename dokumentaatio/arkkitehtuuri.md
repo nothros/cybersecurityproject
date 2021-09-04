@@ -1,4 +1,4 @@
-# Käyttöliittymäarkkitehtuuri ja toiminnallisuudet (EI LOPULLINEN)
+# Käyttöliittymäarkkitehtuuri ja toiminnallisuudet
 
 ## Sovelluksen käyttötarkoitus
 
@@ -14,7 +14,7 @@ Sovelluksella on kaksi käyttäjäroolia. Vanhempi ja lapsi. Vanhempi hallinnoi 
 (Yllä kuva sovelluksen kirjautumissivusta) <br />
 
 
-<img src ="https://raw.githubusercontent.com/nothros/ToDoApp-for-families/main/dokumentaatio/pagesplan.png" width="750">
+<img src ="https://raw.githubusercontent.com/nothros/ToDoApp-for-families/main/dokumentaatio/pagesplan2.png" width="750">
 
 Kyseisessä luonnoksessa välissä oleva punainen viiva tarkoittaa, että riippuen käyttäjän roolista, on näkymä erilainen. Vuokaavio kuvaa sivujen yhteyttä toisiinsa.
 
