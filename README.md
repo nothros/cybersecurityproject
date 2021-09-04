@@ -20,13 +20,13 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä. Lapsen toiminta sovel
 
 [Käyttöohje](#käyttöohje)
 
-[Puutteet](#puutteet)
+[Jatkokehitys](#jatkokehitys)
 
 [Arkkitehtuurikuvaus](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/arkkitehtuuri.md) (linkki ohjaa toiseen tiedostoon)
 
+[Tietokantakaavio](https://github.com/nothros/ToDoApp-for-families/blob/main/dokumentaatio/schema.png) (linkki ohjaa toiseen tiedostoon)
 
 # Toiminnallisuus
-### (22.8.2021)
 
 ### Kirjautuminen/Rekisteröinti
 - Voidaan luoda uusi käyttäjä
@@ -40,13 +40,16 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä. Lapsen toiminta sovel
 - Voidaan lisätä uusi tehtävä (aikuinen) 
 - Päivän tehtävät näkyvät listana, aikuisella kaikkien lapsella vain omat
 - Tehtävät voidaan merkitä tehtävä tehdyksi, tai kumota (lapsi)
+- Päivän tehtävät näkyvät mittarina (lapsi)
 #### Tehtävät
 - Kaikkien käyttäjien tehtävät näkyvät (aikuinen)
 - Tehtäviä voidaan poistaa (aikuinen)
+- Tehtävät näkyvät arvoina (aikuinen)
 - Kaikki omat tehtävät näkyvät, menneet ja tulevat (lapsi)
 #### Perhe
 - Kaikki perheenjäsenet näkyvät (lapsi ja aikuinen)
 - Aikuinen voi poistaa perheenjäseniä (aikuinen)
+- Aikuinen voi poistaa itsensä ja samlla perheen
 #### Kirjaudu ulos 
 - Sovelluksesta voidaan kirjautua ulos
 ### 404
@@ -80,34 +83,27 @@ ja vanhempi voi lisätä perheen johon lapsi voi liittyä. Lapsen toiminta sovel
 
 - Lapsena näät kaikki sinulle annetut tehtävät
 - Voit lapsena kirjata tehtävät tehdyksi
+- Näät lapsena tehtyjen tehtävien määrän mittarina
 
 #### Tehtävälista
 - Aikuisena voit tarkastella kaikkien perheenjäsenten kaikkia tehtäviä
-- Lapsena voit tarkastella kaikkia omia tehtäviäsi (tehtyjä ja tekemättömiä ja tulevia)
+- Aikuisena voit poistaa tehtäviä
+- Aikuisena näät laskurin tehtävistä (kaikki, myöhässä, tehty)
+- Lapsena voit tarkastella kaikkia omia tehtäviäsi (tehtyjä, tekemättömiä, tulevia)
 
 #### Perhe
-- Aikuisena näät kaikki perheenjäsenet ja voit poistaa perheenjäsenen kokonaan (muttet itseäsi)
+- Aikuisena näät kaikki perheenjäsenet
+- Aikuisena voit poistaa perheenjäsenen
+- Aikuisena voit poistaa itsesi, jolloin myös perhe poistetaan
 - Lapsena näät kaikki perheenjäsenesi
-
-#### Asetukset
-- Sivulla ei ole vielä toimintaa
 
 #### Kirjaudu ulos 
 - Pääsivulle päästessäsi, voit kirjautua ulos sivulta oikeasta yläkulmasta navigaatiopalkista.
 
-
-## Puutteet
-
-### Puutteet jotka korjataan sovellukseen
-- Kirjautumisen jälkeinen ulkoasu (esim lomakkeilla) ei vastaa lopullista!
-- Asetukset- sivu uupuu
-- Yksi tietokantataulu (tasklists) putosi huonon suunnittelun tuloksena. Tilalle on tulossa status- taulu, jolla tehtyjen tehtävien statukset selkeyttää näkymää
-- Oikeuksissa puutteita (Toteutettu hassusti ilman tokenia, korjataan)
-- Mikäli palataan sivulle, jonne ei ole oikeutta, ei tulekaan 404- sivua. Korjataan.
-- Tietoturvaa en ole tarkastellut
-- Koodin muotoilu ei ole lopullinen
-
-### Kehitysideat jotka on otettu huomioon ja jotka korjataan jos aikaa jää
+## Jatkokehitys
 - Salasanaa tulisi rekisteröintivaiheessa kysyä kahdesti (saavutettavuus)
 - Lapsen liittyessä perheeseen voisi kysyä vain koodia, eikä perhettä (saavutettavuus)
-- Validointivirheilmoitukset annetaan yksi kerrallaan. Kaikki relevantit virheilmoitukset olisi hyvä näyttää kerralla. (käytettävyys)
+- Asetukset- sivulla voisi muuttaa nimeä, salasanaa, perheen nimeä. 
+- Asetukset sivulla voisi poistaa perheen.
+- Aikuisia voisi olla kaksi
+- Tehtäviä voisi antaa itselleen
