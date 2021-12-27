@@ -1,6 +1,7 @@
 from db import db
+from app import app
 from flask import session, abort, request
-from werkzeug.security import check_password_hash, generate_password_hash
+#from werkzeug.security import check_password_hash, generate_password_hash
 import os
 import secrets
 
@@ -11,13 +12,13 @@ def login(username,password):
     if user == None:
         return False
     else:
-        if check_password_hash(user.password, password):
+        if user.pword == password:
             session["user_id"] = user.id
+            session["logged_in"] = True
             session["user_username"] = user.username
-            session["user_role"] = user.role
-            session["user_name"] = user.name
-            session["visible"] = user.visible
-            session["csrf_token"] = secrets.token_hex(16)
+            # BROKEN AUTHENTICATION
+            # XSS
+            session["csrf_token"] = user.id
             return True
         else:
             return False
@@ -25,28 +26,18 @@ def login(username,password):
 def get_user():
     return session
 
-
-def register(username, name, password, role):
-    hash_value = generate_password_hash(password)
+def register(username, password):
+    #SENSITIVE DATA EXPOSURE
     try:
-        sql = "INSERT INTO users (username, name, password, role) VALUES (:username, :name, :password,:role)"
-        db.session.execute(sql, {"username":username, "name":name, "password":hash_value, "role":role})
+        sql = "INSERT INTO users (username, pword) VALUES (:username, :pword)"
+        db.session.execute(sql, {"username":username, "pword":password})
         db.session.commit()
-    
-    except: 
+    except:
         return False
-
     return True
-
-def remove_user(userid):
-    sql = "UPDATE users SET visible=false WHERE id =:userid"
-    db.session.execute(sql, {"userid":userid})
-    db.session.commit()
     
 def logout():
     del session["user_id"]
+    del session["logged_in"]
     del session["user_username"]
-    del session["user_role"]
-    del session["user_name"]
-    del session["visible"]
     del session["csrf_token"]

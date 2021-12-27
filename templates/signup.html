@@ -1,33 +1,20 @@
 {% extends "index.html" %}
 
-{% block content %}
-<div class="loginbox">
-	<h2> {{message}} </h2>
-
-	<h1>Luo käyttäjätunnus!</h1>
+{% block body %}
+<h3>{{message}}</h3>
+<h2>Sign up!</h2>
     <form action="/signup" method="POST">
-		<p>Käyttäjätunnus</p>
-		<input type="text" name="username" placeholder="Anna käyttäjätunnus (3-15 merkkiä)">
-		<p>Nimi</p>
-		<input type="text" name="name" placeholder="Anna nimesi (2-30 merkkiä)">
-		<p>Salasana</p>
-		<input type="password" name="password" placeholder="Anna salasana">
-		<div class="wrapper">
-			<input type="radio" name="role" id="option-1" value ="aikuinen" checked="checked" >
-			<input type="radio" name="role" id="option-2" value="lapsi">
-			<label for="option-1" class="option option-1">
-				<div class="dot"></div>
-				<span>Vanhempi</span>
-			</label>
-			<label for="option-2" class="option option-2">
-				<div class="dot"></div>
-				<span>Lapsi</span>
-			</label>
-		</div>
-		<input type="submit" value="Rekisteröidy">
-		
-		</br>
-		<a href="/"> Kirjaudu </a>
+
+		<p>Username</p>
+		<input type="text" name="username" class="form-control" placeholder="Give new username">
+	</br>
+		<p>Password</p>
+		<input type="password" name="password" class="form-control" placeholder="Give new password">
+	</br>
+		<input type="submit" value="Sign up">
 	</form>
-</div>
-{% endblock %}
+</br>
+</br>
+  <a href="/login"> Go back to Login </a>
+
+  {% endblock body %}

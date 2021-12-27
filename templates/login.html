@@ -1,17 +1,20 @@
 {% extends "index.html" %}
 
-{% block content %}
-<div class="loginbox">
-	<h2>{{message}}</h2>
-	<h1>Tervetuloa!</h1>
-	<form action="/login" method="POST">
-		<p>Käyttäjätunnus</p>
-		<input type="text" name="username" placeholder="Anna käyttäjätunnus">
-		<p>Salasana</p>
-		<input type="password" name="password" placeholder="Anna salasana">
-		<input type="submit" name="" value="Kirjaudu!">
-		</br>
-		<a href="/signup"> Rekisteröidy </a>
+{% block body %}
+
+<h2>Login!</h2>
+<h4>{{message}}</h4>
+<form action="/login" method="POST">
+		<p>Username</p>
+		<input type="text" name="username" class="form-control" placeholder="Give username">
+	</br>
+		<p>Password</p>
+		<input type="password" name="password" class="form-control" placeholder="Give password">
+	</br>
+		<input type="submit" value="Login">
 	</form>
-</div>
-{% endblock %}
+</br>
+</br>
+<a href="/signup"> Create new account </a>
+
+{% endblock body %}

@@ -1,0 +1,56 @@
+{% extends "index.html" %}
+
+{% block body %}
+
+<h1>Hello!</h1>
+
+<h3>Add info to website</h3>
+<h4>{{message}}</h4>
+<form action="/new" method="post">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <p>Website:</p>
+        <input type="text" name="website" placeholder="Give website">
+      </div>
+      <div class="col-sm">
+        <p>Username:</p>
+        <input type="text" name="username" placeholder="Give username to website">
+      </div>
+
+      <div class="col-sm">
+        <p>Password:</p>
+        <input type="text" name="pw" placeholder="Give password to website">
+      </div>
+    </div>
+  </div>
+</br>
+  <input type="submit" name="" value="Add!">
+</form>
+</br>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Website</th>
+        <th scope="col">Username</th>
+        <th scope="col">Password</th>
+        <th scope="col">Edit</th>
+      </tr>
+    </thead>
+    <tbody>
+        <form action="/profile" method="post">
+            {% for info in infos %}
+            <tr>
+              <!--- Cross-Site Scripting(XSS)  --->
+            <th> {{ info[1] | safe }} </th>
+            <th> {{ info[2] }}</th>
+            <th> {{ info[3] }}</th>
+            <th><a href="/edit/{{info.id}}">Edit!</a></th>
+            {% endfor %}
+            </tr>
+        </form>
+    </tbody>
+  </table>
+
+  {% endblock body %}

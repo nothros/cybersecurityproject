@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+
+{% block body %}
+<h3>Edit info</h3>
+<!--- Cross-Site Scripting(XSS)  --->
+<h4>{{info[1] | safe }}</h4>
+<h4>{{message}}</h4>
+<form action="/edit/{{info.id}}" method="post">
+        <p>New Username:</p>
+        <input type="text" name="new_username" placeholder="Give new username">
+</br>
+</br>
+        <p>New Password:</p>
+        <input type="text" name="new_pw" placeholder="give new password">
+
+</br>
+  <input type="submit" name="" value="Edit!">
+</form>
+
+{% endblock body %}
