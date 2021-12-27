@@ -44,8 +44,8 @@
             <tr>
               <!--- Cross-Site Scripting(XSS)  --->
             <th> {{ info[1] | safe }} </th>
-            <th> {{ info[2] }}</th>
-            <th> {{ info[3] }}</th>
+            <th> {{ info[2] | safe}}</th>
+            <th> {{ info[3] | safe}}</th>
             <th><a href="/edit/{{info.id}}">Edit!</a></th>
             {% endfor %}
             </tr>
