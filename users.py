@@ -17,7 +17,6 @@ def login(username,password):
             session["logged_in"] = True
             session["user_username"] = user.username
             # BROKEN AUTHENTICATION
-            # XSS
             session["csrf_token"] = user.id
             return True
         else:
