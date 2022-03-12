@@ -1,5 +1,9 @@
 # cybersecurityproject_part1
 
+This is a project for the CyberSecurityBase- course in the University of Helsinki. 
+The main idea was to create a vulnerable Webapp. 
+
+(https://cybersecuritybase.mooc.fi) 
 
 ## Installation instructions:
 ### Database:
